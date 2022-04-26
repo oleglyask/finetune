@@ -1,5 +1,5 @@
 import os
-from flask_migrate import Migrate
+from flask_migrate import Migrate, upgrade
 from .app import create_app, db
 from .app.models import Permission, User, Role
 
@@ -19,15 +19,17 @@ app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 migrate = Migrate(app, db, render_as_batch=True) #render_as_batch is for sqlite only
 
 
-# from flask_migrate import upgrade
+# Runs after deployment via following commands on the CLI:
+# "heroku run flask deploy"
+# "heroku restart"
+@app.cli.command()
+def deploy():
+    """ Run deployment tasks """
+    # migrate database
+    upgrade()
 
-# @app.cli.command()
-# def deploy():
-#     """ Run deployment tasks """
-#     # migrate database
-#     upgrade()
-
-#     Role.insert_roles()
+    # inserts roles into Role table
+    Role.insert_roles()
 
 
 @app.shell_context_processor

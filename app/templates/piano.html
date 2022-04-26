@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/vexflow/build/cjs/vexflow.js"></script>
+    <script src="{{url_for('static', filename='finetune.js')}}" defer></script>
+    <script type="text/javascript">
+        let baseURL = "{{ url_for('main.index') }}"
+        let high_score = '{{ high_score }}'
+        let NOTES = []
+        '{% for note in notes if note.color == "white" %}'
+            NOTES.push('{{note.name}}')
+        '{% endfor %}'
+    </script>
+
+{% endblock %}
+
+{% block title %}
+    {{super()}} Finetune
+{% endblock %}
+
+{% block page_content %}
+{{super()}}
+
+<div class="game-container">
+
+    <!-- container to place VexFlow music sheet -->
+    <div id="vexflow-space"></div>
+
+    <!-- counter and score -->
+    <div class="flexbox-middle">
+        <div class="flexbox-item flexbox-item-timer">
+            <span class="badge label">timer: </span>
+            <span id="counter" class="badge"> </span>
+        </div>
+        <div class="flexbox-item flexbox-item-score">
+            <span class="badge label" id="newScore">score: </span>
+            <span id="score" class="badge">0</span>
+        </div>
+    </div>
+
+    <!-- Creates the piano shape and adds audio notes to correspond to each key -->
+    <div class="piano">
+        {% for note in notes %}
+        <div data-note="{{ note.name }}" class="key {{ note.color }}">
+            <span class="noteLabel" id="label{{note.name}}">{{note.name}}</span>
+        </div>
+        <audio id="{{ note.name }}" src="{{url_for('static', filename=note.name + '4.mp3')}}"></audio>
+        {% endfor %}
+    </div>
+
+    <!-- <button id='btn-pause' type='button' class='btn btn-block btn-primary'>Pause</button> -->
+    <div class="flexbox-buttons">
+        <div class="btn-container"><a id="btn-pause" class="btn btn-default btn-success btn-lg .active btn-block">Start</a></div>
+        <div class="btn-container"><a id="btn-exit" class="btn btn-default btn-success btn-lg .active btn-block">Exit</a></div>
+        <!-- btn-danger  btn-default-->
+    </div>
+
+
+</div>
+{% endblock %}

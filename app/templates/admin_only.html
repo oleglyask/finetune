@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}{{super()}} Admin {% endblock title %}
+
+{% block navbar %}
+    {{ super() }}
+{% endblock navbar %}
+
+{% block page_content %}
+{{ super() }}
+<!-- displays all the users -->
+{% if users %}
+    <div class="headers">Users</div>
+
+    <div class="forms-flexbox">
+        <div class="form">
+
+            <table class="table">
+                <caption>click on the Username to go to Profile</caption>
+                <tbody>
+                    <tr>
+                        <th scope="col">Username</th>
+                        <th scope="col">Email</th>
+                    </tr>
+                    {% for user in users %}
+                        <tr>
+                            <td>
+                                <img class="img-rounded profile_thumbnail" src="{{ user.unicornify(size=32) }}">
+                                <a href="{{ url_for('main.user', username=user.username) }}"> {{ user.username }} </a>
+                            </td>
+                            <td>{{ user.email }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

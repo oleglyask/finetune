@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% import "_macros.html" as macros %}
+
+{% block title %}
+    {{super()}}
+    User - {{user.username}}
+{% endblock title %}
+
+{% block navbar %}
+    {{ super() }}
+{% endblock navbar %}
+
+{% block page_content %}
+{{ super() }}
+<div class="headers">Profile</div>
+
+<div class="forms-flexbox">
+    <div><img class="img-rounded profile-thumbnail" src="{{ user.unicornify() }}"></div>
+    <div class="profile-header ">
+        <h1>{{ user.username }}</h1>
+
+        <table class="table">
+            <tbody>
+            <tr>
+            <th scope="row">Name</th>
+            <td>{% if user.name %}{{ user.name }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th scope="row">Highest Score</th>
+                <td>{% if user.high_score %}{{ user.high_score }}{% endif %}</td>
+                </tr>
+            <tr>
+            <th scope="row">Location</th>
+            <td>{% if user.location %}{{ user.location }}{% endif %}</td>
+            </tr>
+            {% if current_user.is_administrator() %}
+                <tr>
+                <th scope="row">Email</th>
+                <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
+                </tr>
+            {% endif %}
+            <tr>
+            <th scope="row">Bio</th>
+            <td>{% if user.bio %}{{ user.bio }}{% endif %}</td>
+            </tr>
+            <tr>
+            <th scope="row">Last played</th>
+            <td>{{ moment(user.last_seen).fromNow() }}</td>
+            </tr>
+            </tbody>
+        </table>
+        <!-- user can edit its profile -->
+        {% if user == current_user %}
+        <a class="btn btn-default" href="{{ url_for('main.edit_profile') }}">
+            Edit Profile
+        </a>
+        {% endif %}
+        <!-- administrator can edit anyone's profile link -->
+        {% if current_user.is_administrator() %}
+        <a class="btn btn-danger" href="{{ url_for('main.admin_edit_profile', id=user.id) }}">
+            Edit as Admin
+        </a>
+        {% endif %}
+    </div>
+</div>
+
+<!-- {% if pagination and pagination.pages > 1  %}
+<div class="pagination">
+    {{ macros.pagination_widget(pagination, 'main.user', username=user.username) }}
+</div>
+{% endif %} -->
+
+{% endblock %}

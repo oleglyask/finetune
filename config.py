@@ -1,6 +1,5 @@
 import os
 import uuid
-from . import app
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -90,13 +89,13 @@ class HerokuConfig(ProductionConfig):
         file_handler.setLevel(file_handler, level=logging.INFO)
         app.logger.addHandler(file_handler)
 
-    # Heroku uses a reverse proxy server to redirect any client requests meant for the app.
-    # These client requests don't go directly to the app but instead to this proxy server.
-    # Because of how Heroku's proxy server works, the app would get confused and would send external links
-    # like confirmation tokens through http://.
-    # To ensure the app doesn't get confused, Werkzeug's ProxyFix is used fix it this 'confusion'
-    from werkzeug.middleware.proxy_fix import ProxyFix
-    app.wsgi_app = ProxyFix(app.wsgi_app)
+        # Heroku uses a reverse proxy server to redirect any client requests meant for the app.
+        # These client requests don't go directly to the app but instead to this proxy server.
+        # Because of how Heroku's proxy server works, the app would get confused and would send external links
+        # like confirmation tokens through http://.
+        # To ensure the app doesn't get confused, Werkzeug's ProxyFix is used fix it this 'confusion'
+        from werkzeug.middleware.proxy_fix import ProxyFix
+        app.wsgi_app = ProxyFix(app.wsgi_app)
 
 config = {
     'development': DevelopmentConfig,

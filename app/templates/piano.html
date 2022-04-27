@@ -63,6 +63,8 @@
 
 {% block scripts %}
 
+<script src="{{url_for('static', filename='finetune.js')}}"></script>
+
 <script type="text/javascript">
     let baseURL = "{{ url_for('main.index') }}";
     let high_score = '{{ high_score }}';
@@ -71,8 +73,6 @@
         NOTES.push('{{note.name}}');
     '{% endfor %}'
 </script>
-
-<script src="{{url_for('static', filename='finetune.js')}}"></script>
 
 {% endblock %}
 

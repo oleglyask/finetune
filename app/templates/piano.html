@@ -4,15 +4,15 @@
     {{ super() }}
     <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}"> -->
     <script src="https://cdn.jsdelivr.net/npm/vexflow/build/cjs/vexflow.js"></script>
-    <script src="{{url_for('static', filename='finetune.js')}}" defer></script>
+    <!-- <script src="{{url_for('static', filename='finetune.js')}}" defer></script>
     <script type="text/javascript" defer>
-        baseURL = "{{ url_for('main.index') }}"
-        let high_score = '{{ high_score }}'
-        let NOTES = []
+        let baseURL = "{{ url_for('main.index') }}";
+        let high_score = '{{ high_score }}';
+        let NOTES = [];
         '{% for note in notes if note.color == "white" %}'
-            NOTES.push('{{note.name}}')
+            NOTES.push('{{note.name}}');
         '{% endfor %}'
-    </script>
+    </script> -->
 
 {% endblock %}
 
@@ -60,3 +60,13 @@
 
 </div>
 {% endblock %}
+
+<script src="{{url_for('static', filename='finetune.js')}}"></script>
+<script type="text/javascript">
+    let baseURL = "{{ url_for('main.index') }}";
+    let high_score = '{{ high_score }}';
+    let NOTES = [];
+    '{% for note in notes if note.color == "white" %}'
+        NOTES.push('{{note.name}}');
+    '{% endfor %}'
+</script>

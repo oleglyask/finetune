@@ -3,10 +3,8 @@ from flask_migrate import Migrate, upgrade
 from .app import create_app, db
 from .app.models import Permission, User, Role
 
-
 # create the app instance
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
-
 
 # To Initialize DB and Models
 # in flask shell run db.create_all()

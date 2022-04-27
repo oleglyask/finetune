@@ -1,7 +1,9 @@
 import os
 from flask_migrate import Migrate, upgrade
-from .app import create_app, db
-from .app.models import Permission, User, Role
+# from .app import create_app, db
+from app import create_app, db
+# from .app.models import Permission, User, Role
+from app.models import Permission, User, Role
 
 # create the app instance
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')

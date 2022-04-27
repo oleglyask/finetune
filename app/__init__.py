@@ -48,18 +48,18 @@ def create_app(config_name='default'):
     # The additions to the policy will allow the app to use Bootstrap styling and to download images from anywhere.
     # If new features added to the app, will need to update the content_security_policy to allow additional resources
     # from outside the app.
-    if app.config['HTTPS_REDIRECT']:
-        from flask_talisman import Talisman
-        Talisman(app, content_security_policy={
-                'default-src': [
-                    "'self'",
-                    'cdnjs.cloudflare.com',
-                ],
-                # allow images from anywhere, 
-                #   including unicornify.pictures
-                'img-src': '*'
-            }
-        )
+    # if app.config['HTTPS_REDIRECT']:
+    #     from flask_talisman import Talisman
+    #     Talisman(app, content_security_policy={
+    #             'default-src': [
+    #                 "'self'",
+    #                 'cdnjs.cloudflare.com',
+    #             ],
+    #             # allow images from anywhere,
+    #             #   including unicornify.pictures
+    #             'img-src': '*'
+    #         }
+    #     )
     #################################################################
 
     return app

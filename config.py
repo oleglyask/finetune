@@ -55,6 +55,7 @@ class ProductionConfig(Config):
     def init_app(cls, app):
         Config.init_app(app)
 
+        # Sends email to ADMIN if error occurs
         import logging
         from logging.handlers import SMTPHandler
         creds = None

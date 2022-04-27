@@ -28,6 +28,9 @@ def deploy():
     # migrate database
     upgrade()
 
+    # creating tables and relationships
+    db.create_all()
+
     # inserts roles into Role table
     Role.insert_roles()
 

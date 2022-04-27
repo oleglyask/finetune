@@ -6,7 +6,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vexflow/build/cjs/vexflow.js"></script>
     <script src="{{url_for('static', filename='finetune.js')}}" defer></script>
     <script type="text/javascript" defer>
-        let baseURL = "{{ url_for('main.index') }}"
+        baseURL = "{{ url_for('main.index') }}"
         let high_score = '{{ high_score }}'
         let NOTES = []
         '{% for note in notes if note.color == "white" %}'

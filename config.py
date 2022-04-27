@@ -48,6 +48,9 @@ class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
         f'sqlite:///{os.path.join(basedir, "data.sqlite")}'
 
+    if SQLALCHEMY_DATABASE_URI.startswith("postgres://"):
+        SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace("postgres://", "postgresql://", 1)
+
     @classmethod
     def init_app(cls, app):
         Config.init_app(app)
@@ -77,6 +80,10 @@ class HerokuConfig(ProductionConfig):
     # HTTPS_REDIRECT is only set to True if the DYNO environment variable exists, which is set by Heroku in it's environment.
     # If testing Heroku configuration locally, the app would not use TLS.
     HTTPS_REDIRECT = True if os.environ.get('DYNO') else False
+
+    # Fixes current issues with heroku still using "postgres://"(SQLAlchemy does not support that) instead of "postgresql://"
+    # if ProductionConfig.SQLALCHEMY_DATABASE_URI.startswith("postgres://"):
+    #     ProductionConfig.SQLALCHEMY_DATABASE_URI = ProductionConfig.SQLALCHEMY_DATABASE_URI.replace("postgres://", "postgresql://", 1)
 
     @classmethod
     def init_app(cls, app):

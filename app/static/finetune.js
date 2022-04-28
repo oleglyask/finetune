@@ -99,7 +99,7 @@ function playNote(key, scoreChangeClass, correctORWrong){
     scoreCounter.classList.add(scoreChangeClass)
     document.getElementById("label" + key.dataset.note).classList.add(correctORWrong);
     // Check for high score
-    if (SCORE > high_score) {
+    if ((high_score != 'None') && (SCORE > high_score)) {
         document.getElementById('newScore').innerHTML = 'New High Score'
     }
 

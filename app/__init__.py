@@ -56,6 +56,7 @@ def create_app(config_name='default'):
                 'default-src': [
                     "'self'",
                     'cdnjs.cloudflare.com',
+                    'cdn.jsdelivr.net',
                 ],
                 # allow images from anywhere,
                 #   including unicornify.pictures

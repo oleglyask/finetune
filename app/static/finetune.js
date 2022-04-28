@@ -4,16 +4,26 @@ var TIMER = null;
 var TIMER_INTERVAL = 5000; //countdown in seconds (*1000)
 var PAUSED = true;
 var START = true;
+var NOTES = []
+var high_score = document.getElementById('score').dataset.high
+var baseURL = document.getElementById('btn-exit').dataset.baseurl
 
 // Initialize the timer and score counters
 document.getElementById('score').innerHTML = SCORE
 document.getElementById('counter').innerHTML = '0'
 
+
+// Creating a variable NOTES that will determine random note selection
+// from WHITE keys only. Can use this to create difficulty levels
+document.querySelectorAll('.white').forEach(key => {
+        NOTES.push(key.dataset.note)
+})
+
 /* Creating eventListners for keys to play the notes */
 const keys = document.querySelectorAll('.key')
-
 // The inside code will execute when piano key is pressed
 keys.forEach(key => {
+    // Adds a click event to each key on the piano
     key.addEventListener('click', () => {
         if (!PAUSED){
             // playNote(key)
@@ -89,9 +99,9 @@ function playNote(key, scoreChangeClass, correctORWrong){
     scoreCounter.classList.add(scoreChangeClass)
     document.getElementById("label" + key.dataset.note).classList.add(correctORWrong);
     // Check for high score
-    // if (SCORE > high_score) {
-    //     document.getElementById('newScore').innerHTML = 'New High Score'
-    // }
+    if (SCORE > high_score) {
+        document.getElementById('newScore').innerHTML = 'New High Score'
+    }
 
     //Removes the classes that will triger the colors to go back to the original
     noteAudio.addEventListener('ended', () => {

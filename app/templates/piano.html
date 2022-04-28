@@ -2,18 +2,8 @@
 
 {% block head %}
     {{ super() }}
-    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}"> -->
     <script src="https://cdn.jsdelivr.net/npm/vexflow/build/cjs/vexflow.js"></script>
-    <!-- <script src="{{url_for('static', filename='finetune.js')}}" defer></script>
-    <script type="text/javascript" defer>
-        let baseURL = "{{ url_for('main.index') }}";
-        let high_score = '{{ high_score }}';
-        let NOTES = [];
-        '{% for note in notes if note.color == "white" %}'
-            NOTES.push('{{note.name}}');
-        '{% endfor %}'
-    </script> -->
-
+    <script src="{{url_for('static', filename='finetune.js')}}" defer></script>
 {% endblock %}
 
 {% block title %}
@@ -36,7 +26,7 @@
         </div>
         <div class="flexbox-item flexbox-item-score">
             <span class="badge label" id="newScore">score: </span>
-            <span id="score" class="badge">0</span>
+            <span id="score" class="badge" data-high="{{ high_score }}">0</span>
         </div>
     </div>
 
@@ -53,27 +43,13 @@
     <!-- <button id='btn-pause' type='button' class='btn btn-block btn-primary'>Pause</button> -->
     <div class="flexbox-buttons">
         <div class="btn-container"><a id="btn-pause" class="btn btn-default btn-success btn-lg .active btn-block">Start</a></div>
-        <div class="btn-container"><a id="btn-exit" class="btn btn-default btn-success btn-lg .active btn-block">Exit</a></div>
+        <div class="btn-container"><a id="btn-exit" data-baseul="{{ url_for('main.index') }}" class="btn btn-default btn-success btn-lg .active btn-block">Exit</a></div>
         <!-- btn-danger  btn-default-->
     </div>
 
 
+
 </div>
-{% endblock %}
-
-{% block scripts %}
-
-<script src="{{url_for('static', filename='finetune.js')}}"></script>
-
-<script type="text/javascript">
-    let baseURL = "{{ url_for('main.index') }}";
-    let high_score = '{{ high_score }}';
-    let NOTES = [];
-    '{% for note in notes if note.color == "white" %}'
-        NOTES.push('{{note.name}}');
-    '{% endfor %}'
-</script>
-
 {% endblock %}
 
 

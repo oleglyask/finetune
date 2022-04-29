@@ -15,7 +15,7 @@ from ..email import send_email
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data, password=form.password.data, confirmed=True)
+        user = User(username=form.username.data, email=form.email.data, password=form.password.data, confirmed=True, high_score=0)
         # in order to have email authantication working, omit confirmed=True
         # user = User(username=form.username.data, email=form.email.data, password=form.password.data)
         db.session.add(user)

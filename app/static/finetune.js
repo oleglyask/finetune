@@ -100,7 +100,8 @@ function playNote(key, scoreChangeClass, correctORWrong){
     document.getElementById("label" + key.dataset.note).classList.add(correctORWrong);
     // Check for high score
     if ((high_score != 'None') && (SCORE > high_score)) {
-        document.getElementById('newScore').innerHTML = 'New High Score'
+        document.getElementById('score').innerHTML = 'New High Score'
+
     }
 
     //Removes the classes that will triger the colors to go back to the original
@@ -109,7 +110,7 @@ function playNote(key, scoreChangeClass, correctORWrong){
         scoreCounter.classList.remove(scoreChangeClass)
         document.getElementById("label" + key.dataset.note).classList.remove(correctORWrong);
         // removes the HIGH score
-        // document.getElementById('newScore').innerText = 'Score'
+        document.getElementById('score').innerText = SCORE
     })
 }
 

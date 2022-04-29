@@ -59,7 +59,7 @@ def create_app(config_name='default'):
                     'cdn.jsdelivr.net'
                 ],
                 # allow inline script source.  Must add <script nonce="{{ csp_nonce() }}"> to html tag
-                'script-src': "'self'",
+                # 'script-src': "'self'",
                 # allow images from anywhere,
                 #   including unicornify.pictures
                 'img-src': '*'

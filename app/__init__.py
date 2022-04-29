@@ -56,7 +56,8 @@ def create_app(config_name='default'):
                 'default-src': [
                     "'self'",
                     'cdnjs.cloudflare.com',
-                    'cdn.jsdelivr.net'
+                    'cdn.jsdelivr.net',
+                    'MomentJS.com'
                 ],
                 # allow inline script source.  Must add <script nonce="{{ csp_nonce() }}"> to html tag
                 # 'script-src': "'self'",
@@ -64,7 +65,7 @@ def create_app(config_name='default'):
                 #   including unicornify.pictures
                 'img-src': '*'
             },
-            content_security_policy_nonce_in=['default-src']
+            # content_security_policy_nonce_in=['default-src']
         )
     #################################################################
 

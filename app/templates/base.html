@@ -4,6 +4,7 @@
     {{ super() }}
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="shortcut icon" href="#">
+    <script type = "text/JavaScript" src = "https://MomentJS.com/downloads/moment.js"></script>
 {% endblock %}
 
 {% block title %}
@@ -81,6 +82,6 @@
 {{ moment.include_moment() }}
 {% endblock %} -->
 
-<script nonce="{{ csp_nonce() }}">
+<!-- <script nonce="{{ csp_nonce() }}">
     {{ moment.include_moment() }}
-</script>
+</script> -->

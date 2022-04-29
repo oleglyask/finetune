@@ -9,8 +9,8 @@ from ..email import send_email
 
 
 # @auth.route('/welcome')
-# def welcome():
-#     return render_template('auth/email/confirm.html', token=current_user.generate_confirmation_token())
+# def testing():
+
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():

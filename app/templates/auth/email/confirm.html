@@ -1,1 +1,52 @@
-<p>Please confirm your email, <a href="{{url_for('auth.confirm', token=token, _external=True)}}">click here</a>!</p>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        .email-text div {
+            margin: 30px;
+            font-family: hybrea,proxima-nova,'helvetica neue', helvetica, arial, geneva, sans-serif;;
+
+        }
+        
+        .email-text a {
+            text-decoration: none;
+            font-size: x-large;
+            color: #73AD21;
+            font-style: italic;
+            font-family: cursive;
+            margin: 30px;
+        }
+        #email-link {font-size: medium; margin:0px;}
+        #token-link {font-size: x-small; margin: 0px;}
+    </style>
+</head>
+<body>
+
+    <div class="email-text">
+        <a id="logo" href="http://127.0.0.1:5000/">finetune</a>
+
+        <div>Thanks for signing up with Finetune! You must follow this link within 60 minutes of registration to activate your account</div>
+
+        <div> <a id="token-link" href="{{url_for('auth.confirm', token=token, _external=True)}}">{{url_for('auth.confirm', token=token, _external=True)}}</a></div>
+
+        <div>Have fun, and don't hesitate to contact me with your feedback.</div>
+
+        <div>
+            <p>The Finetune Team,</p>
+            <p>Oleg Lyaskoronskiy</p>
+            <a id="email-link" href="mailto:olegly@outlook.com">olegly@outlook.com</a>
+        </div>
+    </div>
+
+
+</body>
+</html>
+
+
+

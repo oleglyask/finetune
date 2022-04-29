@@ -1,15 +1,16 @@
 
-
-
 from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_required, login_user, logout_user
-from sqlalchemy import true
 from . import auth
 from .forms import LoginForm, RegisterForm, ChangePasswordForm, ChangeEmailForm
 from ..models import User
 from .. import db
 from ..email import send_email
 
+
+# @auth.route('/welcome')
+# def welcome():
+#     return render_template('auth/email/confirm.html', token=current_user.generate_confirmation_token())
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
@@ -22,7 +23,7 @@ def register():
         db.session.commit()
         flash(f'Please confirm your email.  An email has been sent to {user.email}')
         token = user.generate_confirmation_token()
-        send_email(user.email, 'Welcome', 'mail/welcome', user=user)
+        # send_email(user.email, 'Welcome', 'mail/welcome', user=user)
         send_email(user.email, 'Confirm Email', 'auth/email/confirm', token=token)
         return redirect(url_for('auth.login'))
     return render_template('auth/auth_forms.html', form=form, title='register')

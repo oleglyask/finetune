@@ -1,1 +1,9 @@
-Please confirm your email, {{url_for('auth.confirm', token=token, _external=True)}}!
+Thanks for signing up with Finetune! You must follow this link within 60 minutes of registration to activate your account
+
+{{url_for('auth.confirm', token=token, _external=True)}}
+
+Have fun, and don't hesitate to contact me with your feedback.
+
+The Finetune Team,
+Oleg Lyaskoronskiy
+olegly@outlook.com

@@ -20,8 +20,8 @@ class Config():
     # Other email settings
     FINETUNE_ADMIN = os.environ.get('FINETUNE_ADMIN') #email address of the administrator
 
-    FINETUNE_MAIL_SUBJECT_PREFIX = 'Finetune — '
-    FINETUNE_MAIL_SENDER = f'Finetune - <{FINETUNE_ADMIN}>'
+    FINETUNE_MAIL_SUBJECT_PREFIX = 'finetune - '
+    FINETUNE_MAIL_SENDER = f'No Reply <{FINETUNE_ADMIN}>'
 
     # ----------------------------------------------
     # MY_APP_COMPS_PER_PAGE = 2

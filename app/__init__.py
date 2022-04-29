@@ -64,7 +64,7 @@ def create_app(config_name='default'):
                 #   including unicornify.pictures
                 'img-src': '*'
             },
-            # content_security_policy_nonce_in=['script-src']
+            content_security_policy_nonce_in=['default-src']
         )
     #################################################################
 

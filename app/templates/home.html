@@ -3,7 +3,10 @@
 {% import "_macros.html" as macros %} -->
 
 {% block title %} {{super()}} Home {% endblock %}
-{% block head %} {{super()}} {% endblock %}
+{% block head %}
+    {{super()}}
+    <script src="{{url_for('static', filename='home.js')}}" defer></script>
+{% endblock %}
 
 {% block page_content %}
     {{super()}}
@@ -39,19 +42,6 @@
         </div>
 
     </div>
-
-    <script>
-        document.getElementById('basic').checked = true
-        play = document.getElementById('play')
-        play.addEventListener('click', () => {
-            document.querySelectorAll('.radio-btn').forEach(radio => {
-                if (radio.checked === true) {
-                    play.href = "{{url_for('main.play', level='')}}" + radio.value
-                }
-            })
-        })
-    </script>
-
 
     <!-- {% if pagination and pagination.pages > 1 %}
     <div class="pagination">

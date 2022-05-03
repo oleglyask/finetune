@@ -7,19 +7,21 @@ from .. import db
 from ..models import User, Role, Permission, Note
 from ..decorators import admin_required, permission_required
 
-# Home page
-@main.route('/', methods=['GET'])
+# Start page
+@main.route('/')
 def index():
-    if current_user.is_authenticated:
-        top_users = User.query.filter(User.high_score != None).order_by(User.high_score.desc()).limit(10).all()
-        return render_template('index.html', top_users=top_users)
-    else:
-        return redirect(url_for('auth.login'))
+    return render_template('index.html')
+
+# Home page
+@main.route('/home', methods=['GET', 'POST'])
+@login_required
+def home():
+    return render_template('home.html')
 
 # game page
-@main.route('/play')
+@main.route('/play/<level>')
 @login_required
-def play():
+def play(level):
     current_user.ping()
     notes = [
         Note('C','white'),
@@ -34,7 +36,7 @@ def play():
         Note('A', 'white'),
         Note('Bb', 'black'),
         Note('B', 'white'),]
-    return render_template('piano.html', notes=notes, high_score=current_user.high_score)
+    return render_template('piano.html', notes=notes, high_score=current_user.high_score, level=level)
 
 # called when user pressed the Exit button on the game page
 @main.route('/exit/<score>')
@@ -45,7 +47,14 @@ def exit(score):
         flash('You got a new High score')
         db.session.add(current_user._get_current_object())
         db.session.commit()
-    return redirect(url_for('main.index'))
+    return redirect(url_for('main.top_scores'))
+
+# will display top scores
+@main.route('/topscores')
+@login_required
+def top_scores():
+    top_users = User.query.filter(User.high_score != None).order_by(User.high_score.desc()).limit(10).all()
+    return render_template('top_scores.html', top_users=top_users)
 
 # route() comes first
 # then check if user authenticated

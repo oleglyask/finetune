@@ -6,7 +6,30 @@ var PAUSED = true;
 var START = true;
 var NOTES = []
 var high_score = document.getElementById('score').dataset.high
-var baseURL = document.getElementById('btn-exit').dataset.baseurl
+var level = document.getElementById('vexflow-space').dataset.level
+var randomMap = {}
+
+// Create the possible note/stave/octave map based on the level
+if (level === 'basic'){
+    randomMap = {
+        treble: [4]
+    }
+} else if (level === 'treble'){
+    var randomMap = {
+        treble: [4,5]
+    }
+} else if (level === 'bass'){
+    var randomMap = {
+        bass: [2,3]
+    }
+} else {
+    var randomMap = {
+        treble: [4,5],
+        bass: [2,3]
+    }
+}
+
+
 
 // Initialize the timer and score counters
 document.getElementById('score').innerHTML = SCORE
@@ -69,10 +92,21 @@ pauseBtn.addEventListener('click', () => {
 //Register the Exit button
 exitBtn = document.getElementById('btn-exit')
 exitBtn.addEventListener('click', () => {
-    exitBtn.href = baseURL + 'exit/' + SCORE
+    exitURL = document.getElementById('btn-exit').dataset.baseurl
+    exitBtn.href = exitURL + SCORE
 })
 
+// render the first note
 renderNote();
+
+// scroll to the bottom of the page when page loads
+window.onload = function () {
+    setTimeout(function() {window.scrollTo(0, document.body.scrollHeight);}, 1000);
+
+};
+// document.documentElement.addEventListener("load", () => {
+//     window.scrollTo(0, document.body.scrollHeight);
+// });
 
 
 //------------  FUNCTIONS START ------------------
@@ -122,11 +156,7 @@ function renderNote(note){
     const width = document.getElementById('vexflow-space').offsetWidth
     const height = document.getElementById('vexflow-space').offsetHeight
 
-    // Create the possible note/stave/octave map
-    randomMap = {
-        treble: [4,5],
-        bass: [2,3]
-    }
+    // Get random note from the possible global randomMap variable
     let clefIndex = Math.floor(Math.random() * Object.keys(randomMap).length);
     let clefName = Object.keys(randomMap)[clefIndex];
     let octaveIndex = Math.floor(Math.random() * randomMap[clefName].length);

@@ -10,11 +10,7 @@
     {{super()}}
 
     <div class="headers">
-        {% if title == 'login' %}
-            Welcome to Finetune
-        {% else %}
-            {{title.capitalize()}}
-        {% endif %}
+        {{title.capitalize()}}
     </div>
 
     <div class="forms-flexbox">

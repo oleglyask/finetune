@@ -16,7 +16,7 @@
 <div class="game-container">
 
     <!-- container to place VexFlow music sheet -->
-    <div id="vexflow-space"></div>
+    <div id="vexflow-space" data-level="{{ level }}"></div>
 
     <!-- counter and score -->
     <div class="flexbox-middle">
@@ -43,8 +43,12 @@
     <!-- <button id='btn-pause' type='button' class='btn btn-block btn-primary'>Pause</button> -->
     <div class="flexbox-buttons">
         <div class="btn-container"><a id="btn-pause" class="btn btn-default btn-success btn-lg .active btn-block">Start</a></div>
-        <div class="btn-container"><a id="btn-exit" data-baseurl="{{ url_for('main.index') }}" class="btn btn-default btn-success btn-lg .active btn-block">Exit</a></div>
+        <div class="btn-container"><a id="btn-exit" data-baseurl="{{ url_for('main.exit', score='') }}" class="btn btn-default btn-success btn-lg .active btn-block">Exit</a></div>
         <!-- btn-danger  btn-default-->
+    </div>
+
+    <div class="cheat-sheet headers">
+        <p> Open <a href="{{url_for('static', filename='grand_staff.jpg')}}" target="_blank">Notes Cheat Sheet</a> for help</p>
     </div>
 </div>
 {% endblock %}

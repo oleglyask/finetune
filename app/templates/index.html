@@ -1,51 +1,34 @@
 {% extends 'base.html' %}
-{% import 'bootstrap/wtf.html' as wtf %}
-{% import "_macros.html" as macros %}
 
-{% block title %} {{super()}} Home {% endblock %}
-{% block head %} {{super()}} {% endblock %}
+{% block title %} {{super()}} finetune {% endblock %}
+{% block head %}
+    {{super()}}
+    <script src="https://cdn.jsdelivr.net/npm/vexflow/build/cjs/vexflow.js"></script>
+    <script src="{{url_for('static', filename='index.js')}}" defer></script>
+{% endblock %}
 
 {% block page_content %}
     {{super()}}
 
-    <!-- Play button -->
-    <div class="play-btn forms-flexbox"><a class="btn btn-default btn btn-success btn-lg .active btn-block"
-        href="{{url_for('main.play')}}" >Play</a></div>
+    <div class="game-container">
 
-    <!-- Top scores -->
-    {% if top_users %}
-    <div class="headers">Top Scores</div>
+        <div class="headers">
+                <div class="main-header">Welcome to finetune <br>
+                <h3> game that lets you practice piano site reading</h3></div>
+        </div>
 
-    <div class="forms-flexbox">
-        <div class="form">
+        <!-- container to place VexFlow music sheet -->
+        <div id="vexflow-space"></div>
 
-            <table class="table">
-                <caption>click on the Username to go to Profile</caption>
-                <tbody>
-                    <tr>
-                        <th scope="col">Username</th>
-                        <th scope="col">Score</th>
-                    </tr>
-                    {% for user in top_users %}
-                        <tr>
-                            <td>
-                                <img class="img-rounded profile_thumbnail" src="{{ user.unicornify(size=32) }}">
-                                <a href="{{ url_for('main.user', username=user.username) }}"> {{ user.username }} </a>
-                            </td>
-                            <td>{{ user.high_score }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-
+        <div class="play-btn forms-flexbox">
+            <a class="btn btn-default btn btn-success btn-lg .active btn-block"
+            {% if current_user.is_authenticated %}
+                href="{{url_for('main.home')}}" >Ready to Play?
+            {% else %}
+                href="{{url_for('auth.login')}}" >Login
+            {% endif %}
+            </a>
         </div>
     </div>
-    {% endif %}
-
-    <!-- {% if pagination and pagination.pages > 1 %}
-    <div class="pagination">
-        {{ macros.pagination_widget(pagination, 'main.index') }}
-    </div>
-    {% endif %} -->
 
 {% endblock %}

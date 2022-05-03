@@ -35,7 +35,9 @@
         </div>
 
         <!-- Play button -->
-        <div class="play-btn forms-flexbox"><a id="play" class="btn btn-default btn btn-success btn-lg .active btn-block">Play</a></div>
+        <div class="play-btn forms-flexbox">
+            <a id="play" data-playurl="{{url_for('main.play', level='')}}" class="btn btn-default btn btn-success btn-lg .active btn-block">Play</a>
+        </div>
 
         <div class="cheat-sheet headers">
             <p> Open <a href="{{url_for('static', filename='grand_staff.jpg')}}" target="_blank">Notes Cheat Sheet</a> before you start if you need some help</p>

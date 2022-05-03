@@ -92,7 +92,7 @@ pauseBtn.addEventListener('click', () => {
 //Register the Exit button
 exitBtn = document.getElementById('btn-exit')
 exitBtn.addEventListener('click', () => {
-    exitURL = document.getElementById('btn-exit').dataset.baseurl
+    exitURL = document.getElementById('btn-exit').dataset.exiturl
     exitBtn.href = exitURL + SCORE
 })
 

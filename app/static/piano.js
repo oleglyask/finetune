@@ -190,16 +190,16 @@ function renderNote(note){
      * Creating 2 new staves
      */
     // TOP
-    // Create a stave of width 'width-160' at position x10, y15 on the SVG.
-    var staveTreble = new VF.Stave(10, 15, width-160);
+    // Create a stave of width 'width-160' at position x10, y0 on the SVG.
+    var staveTreble = new VF.Stave(10, 0, width-160);
     // Add a clef and time signature.
     staveTreble.addClef("treble"); //.addTimeSignature("4/4");
     // Set the context of the stave our previous exposed context and execute the method draw !
     staveTreble.setContext(context).draw();
 
     // BOTTOM
-    // Create a stave with bass clef width 'width-160'  at position x10, y105 on the canvas.
-    var staveBass = new VF.Stave(10, 105, width-160);
+    // Create a stave with bass clef width 'width-160'  at position x10, y90 on the canvas.
+    var staveBass = new VF.Stave(10, 90, width-160);
     staveBass.addClef("bass"); //.addTimeSignature("4/4");
     staveBass.setContext(context).draw();
 

@@ -3,7 +3,11 @@
 }
 
 body {
-    height: 100vh;
+    background-color: rgb(63, 111, 147);
+}
+
+.navbar {
+    background-color: ivory;
 }
 
 .profile-img-container {
@@ -26,9 +30,8 @@ body {
 }
 
 .main-container {
-    background-color: rgb(63, 111, 147);
     width: 100%;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     padding: 30px;
     margin: auto;
     padding-bottom: 0px;

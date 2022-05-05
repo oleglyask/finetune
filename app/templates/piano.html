@@ -7,26 +7,23 @@
 {% endblock %}
 
 {% block title %}
-    {{super()}} Finetune
+    {{super()}} Play
 {% endblock %}
 
 {% block page_content %}
-{{super()}}
-
-<div class="game-container">
 
     <!-- container to place VexFlow music sheet -->
     <div id="vexflow-space" data-level="{{ level }}"></div>
 
     <!-- counter and score -->
-    <div class="flexbox-middle">
-        <div class="flexbox-item flexbox-item-timer">
-            <span class="badge label">timer: </span>
-            <span id="counter" class="badge"> </span>
+    <div class="play-scoreboard label">
+        <div class="timer-score-container">
+            <span class="scoreboard-label">timer: </span>
+            <span class="badge" id="counter">0</span>
         </div>
-        <div class="flexbox-item flexbox-item-score">
-            <span class="badge label" id="newScore">score: </span>
-            <span id="score" class="badge" data-high="{{ high_score }}">0</span>
+        <div class="timer-score-container">
+            <span class="scoreboard-label" id="newScore">score: </span>
+            <span class="badge" id="score" data-high="{{ high_score }}">0</span>
         </div>
     </div>
 
@@ -36,21 +33,24 @@
         <div data-note="{{ note.name }}" class="key {{ note.color }}">
             <span class="noteLabel" id="label{{note.name}}">{{note.name}}</span>
         </div>
-        <audio id="{{ note.name }}" src="{{url_for('static', filename=note.name + '4.mp3')}}"></audio>
+        <audio id="{{ note.name }}" src="{{url_for('static', filename='sounds/' + note.name + '4.mp3')}}"></audio>
         {% endfor %}
     </div>
 
     <!-- <button id='btn-pause' type='button' class='btn btn-block btn-primary'>Pause</button> -->
-    <div class="flexbox-buttons">
-        <div class="btn-container"><a id="btn-pause" class="btn btn-default btn-success btn-lg .active btn-block">Start</a></div>
-        <div class="btn-container"><a id="btn-exit" data-exiturl="{{ url_for('main.exit', score='') }}" class="btn btn-default btn-success btn-lg .active btn-block">Exit</a></div>
-        <!-- btn-danger  btn-default-->
+    <div class="play-buttons-container">
+        <div class="btn-container">
+            <a id="btn-pause" class="btn btn-success btn-lg btn-block">Start</a>
+        </div>
+        <div class="btn-container">
+            <a id="btn-exit" data-exiturl="{{ url_for('main.exit', score='') }}" class="btn btn-success btn-lg btn-block">Exit</a>
+        </div>
     </div>
 
     <div class="cheat-sheet headers">
         <p> Open <a href="{{url_for('static', filename='grand_staff.jpg')}}" target="_blank">Notes Cheat Sheet</a> for help</p>
     </div>
-</div>
+
 {% endblock %}
 
 

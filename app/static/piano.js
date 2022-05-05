@@ -29,14 +29,7 @@ if (level === 'basic'){
     }
 }
 
-
-
-// Initialize the timer and score counters
-document.getElementById('score').innerHTML = SCORE
-document.getElementById('counter').innerHTML = '0'
-
-
-// Creating a variable NOTES that will determine random note selection
+// Initializing variable NOTES that will determine random note selection
 // from WHITE keys only. Can use this to create difficulty levels
 document.querySelectorAll('.white').forEach(key => {
         NOTES.push(key.dataset.note)
@@ -49,18 +42,18 @@ keys.forEach(key => {
     // Adds a click event to each key on the piano
     key.addEventListener('click', () => {
         if (!PAUSED){
-            // playNote(key)
             /// CHECKS THE RESULT OF THE USER clicking a piano key
+
             //user pressed the CORRECT key
             if (key.dataset.note === CURRENT_NOTE) {
                 score(1)
                 // second parameter is the class name for the score counter
-                playNote(key, 'changedUP', 'correct')
+                playNote(key, 'correct')
                 nextNote()
             //user pressed the WRONG key
             } else {
                 score(-1)
-                playNote(key, 'changedDown', 'wrong')
+                playNote(key, 'wrong')
             }
         }
     })
@@ -100,13 +93,10 @@ exitBtn.addEventListener('click', () => {
 renderNote();
 
 // scroll to the bottom of the page when page loads
-window.onload = function () {
-    setTimeout(function() {window.scrollTo(0, document.body.scrollHeight);}, 1000);
+// window.onload = function () {
+//     setTimeout(function() {window.scrollTo(0, document.body.scrollHeight);}, 500);
 
-};
-// document.documentElement.addEventListener("load", () => {
-//     window.scrollTo(0, document.body.scrollHeight);
-// });
+// };
 
 
 //------------  FUNCTIONS START ------------------
@@ -122,16 +112,20 @@ function nextNote(){
 
 // will execute on piano key click and play the note's sound
 // parameters are key - key pressed; scorechangeClass - name of class to be added to the score counter that will define the color changed
-function playNote(key, scoreChangeClass, correctORWrong){
+function playNote(key, correctORWrong){
     const noteAudio = document.getElementById(key.dataset.note)
     const scoreCounter = document.getElementById('score')
     noteAudio.currentTime = 0
     noteAudio.play()
 
     // addes a class to elements that will change color: Piano Key, Score Counter, Note on the Piano Key
-    key.classList.add('active')
-    scoreCounter.classList.add(scoreChangeClass)
+    // Changes the color of the piano key
+    key.classList.add(correctORWrong)
+    // changes the color of the coutner
+    scoreCounter.classList.add(correctORWrong)
+    // makes the note name appear on the piano key
     document.getElementById("label" + key.dataset.note).classList.add(correctORWrong);
+
     // Check for high score
     // if ((high_score != 'None') && (SCORE > high_score)) {
     //     document.getElementById('score').innerHTML = 'New High Score'
@@ -140,11 +134,10 @@ function playNote(key, scoreChangeClass, correctORWrong){
 
     //Removes the classes that will triger the colors to go back to the original
     noteAudio.addEventListener('ended', () => {
-        key.classList.remove('active')
-        scoreCounter.classList.remove(scoreChangeClass)
+        key.classList.remove(correctORWrong)
+        scoreCounter.classList.remove(correctORWrong)
         document.getElementById("label" + key.dataset.note).classList.remove(correctORWrong);
-        // removes the HIGH score
-        // document.getElementById('score').innerText = SCORE
+        // document.getElementById('score').innerText = SCORE // removes the HIGH score
     })
 }
 
@@ -286,7 +279,7 @@ function clearTimer(){
 //changes the score and updates the score element
 function score(change){
     SCORE += change;
-    scoreCounter = document.getElementById('score') //.innerHTML = SCORE
+    scoreCounter = document.getElementById('score')
     scoreCounter.innerHTML = SCORE
 }
 

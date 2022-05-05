@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block title %}
-    Finetune -
+    finetune -
 {% endblock %}
 
 
@@ -71,16 +71,18 @@
 {% endblock %}
 
 {% block content %}
-<div class="container main-container">
+<div class="main-container">
     {% for msg in get_flashed_messages() %}
         <div class="alert alert-warning">
             <button type="button" class="done" data-dismiss="alert">&times;</button>
             {{ msg }}
         </div>
     {% endfor %}
-    {% block page_content %}
+    <div class="game-container">
+        {% block page_content %}
 
-    {% endblock %}
+        {% endblock %}
+    </div>
 </div>
 {% endblock %}
 

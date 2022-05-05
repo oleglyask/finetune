@@ -2,12 +2,13 @@
     box-sizing: border-box;
 }
 
-.profile-thumbnail {
-    position: absolute;
+.profile-img-container {
+    margin-top: 30px;
 }
-.profile-header {
-    min-height: 260px;
-    margin-left: 150px;
+
+.profile-container {
+    min-height: 310px;
+    margin-left: 50px;
 }
 
 #logo {
@@ -33,40 +34,38 @@
     width: 630px;
     height: 100vh;
     margin: auto;
+}
 
+/* all first level children of .game-container */
+.game-container > div {
+    width: 100%;
 }
 
 .forms-flexbox {
     display: flex;
     justify-content: center;
     background-color: beige;
-    width: 40%;
+    width: 100%;
     margin: auto;
     border: 3px solid #73AD21;
     border-radius: 50px;
     padding: 20px;
-
+    margin-top: 30px;
+    margin-bottom: 25px;
 }
 
-.forms-flexbox.play-btn {
-    width: 100%;
-}
-
-.form {
+/* Rendering high scores */
+.table-container {
     width: 80%;
     margin: auto;
     margin-top: 10px;
 
 }
 
-.form p {
-    margin-top: 25px;
-    margin-left: 35px;
-}
-
-.main-container .headers{
+.headers{
     color: white;
-    margin: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
     display: flex;
     justify-content: center;
     font-family: Apple Chancery, cursive;
@@ -79,76 +78,60 @@
     color: beige;
 }
 
-.headers.cheat-sheet{
-    font-size: small;
-}
-.headers.cheat-sheet a{
-    color: beige;
-    font-style: italic;
-}
-
+/* space for rendering notes */
 #vexflow-space {
-    background-color: white;
+    background-color: beige;
     display: flex;
     /* justify-content: center; */
     align-items: center;
     border-radius: 50px;
     border: 3px solid #73AD21;
     padding: 10px;
-    width: 630px;
     height: 310px;
 }
 
-.flexbox-middle {
+.play-scoreboard {
     margin-top: 25px;
     margin-bottom: 25px;
-    width: 630px;
     display: flex;
     justify-content: space-around;
+    color: #73AD21;
 }
 
-.flexbox-item {
-    /* background-color: beige; */
-    width: 230px;
+/* general label settings */
+.label {
+    color: #73AD21;
+    font-style: italic;
+    font-family: cursive;
+    font-size: 4rem;
+    background-color: transparent;
+}
+
+.timer-score-container {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+/* score and timer digit counter */
 .badge {
     font-size: 4rem;
     background-color: transparent;
 }
 
-.badge.level {
-    font-size: 3rem;
-}
-
-.levels {
-    display: flex;
-    justify-content: center;
-}
-
-.label {
-    /* background-color: transparent; */
-    color: #73AD21;
-    font-style: italic;
-    font-family: cursive;
-}
-
-.changedUP {
+/* changes the color of the counter depending if the score goes up or down */
+#score.correct {
     color: #73AD21;
 }
 
-.changedDown {
+#score.wrong {
     color: red;
 }
 
 .piano {
     display: flex;
     justify-content: center;
-    border: 4px solid black;
-    width: 630px;
+    border: 2px solid black;
     padding: 0px;
 }
 
@@ -166,25 +149,28 @@
     font-family: cursive;
 }
 
+/* makes the name of the piano key appear */
 .noteLabel.correct {
     display: block;
-    color: #001501;
-
 }
 
 .noteLabel.wrong {
     display: block;
-    color: red;
 }
 
 .white {
     --width: 90px;
-    background-color: white;
+    background-color: ivory;
     border: 1px solid #333;
 }
 
-.white.active {
-    background-color: rgb(115, 214, 123);
+/* displays color of the piano key depending if the user guessed coorectly or not */
+.key.correct {
+    background-color: #73AD21;
+}
+
+.key.wrong {
+    background-color: lightcoral;
 }
 
 .black {
@@ -199,8 +185,8 @@
     background-color: #333;
 }
 
-.flexbox-buttons {
-    width: 630px;
+/* the pause and exit buttons during play */
+.play-buttons-container {
     display: flex;
     justify-content: center;
     margin-top: 20px;
@@ -209,7 +195,7 @@
 .btn-container {
     margin-left: 25px;
     margin-right: 25px;
-    width: 130px;
+    width: 25%;
 }
 
 .btn-success {
@@ -217,8 +203,11 @@
     font-size: 2.5rem;
 }
 
-.play-btn {
-    margin-top: 25px;
-    margin-bottom: 25px;
+.cheat-sheet{
+    font-size: small;
+}
+.cheat-sheet a{
+    color: beige;
+    font-style: italic;
 }
 

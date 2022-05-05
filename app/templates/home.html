@@ -9,41 +9,32 @@
 {% endblock %}
 
 {% block page_content %}
-    {{super()}}
-
-    <div class="game-container">
 
         <div class="headers">
-                Choose your Level
+                <p>Choose your Level</p>
         </div>
 
-        <div class="forms-flexbox play-btn">
-            <div class="form">
+        <div class="forms-flexbox">
                 <div class="levels">
-                <div>
-                <input type="radio" id="basic" class="radio-btn" name="level" value="basic">
-                <label class="badge label level" for="basic">Basic</label><br>
-                <input type="radio" id="treble" class="radio-btn" name="level" value="treble">
-                <label class="badge label level" for="treble">Treble line</label><br>
-                <input type="radio" id="bass" class="radio-btn" name="level" value="bass">
-                <label class="badge label level" for="bass">Bass line</label><br>
-                <input type="radio" id="all" class="radio-btn" name="level" value="all">
-                <label class="badge label level" for="all">All of it</label>
+                    <input type="radio" id="basic" class="radio-btn" name="level" value="basic">
+                    <label class="badge label" for="basic">Basic</label><br>
+                    <input type="radio" id="treble" class="radio-btn" name="level" value="treble">
+                    <label class="badge label" for="treble">Treble line</label><br>
+                    <input type="radio" id="bass" class="radio-btn" name="level" value="bass">
+                    <label class="badge label" for="bass">Bass line</label><br>
+                    <input type="radio" id="all" class="radio-btn" name="level" value="all">
+                    <label class="badge label" for="all">All of it</label>
                 </div>
-                </div>
-            </div>
         </div>
 
         <!-- Play button -->
-        <div class="play-btn forms-flexbox">
-            <a id="play" data-playurl="{{url_for('main.play', level='')}}" class="btn btn-default btn btn-success btn-lg .active btn-block">Play</a>
+        <div class="forms-flexbox">
+            <a id="play" data-playurl="{{url_for('main.play', level='')}}" class="btn btn-success btn-lg btn-block">Play</a>
         </div>
 
         <div class="cheat-sheet headers">
             <p> Open <a href="{{url_for('static', filename='grand_staff.jpg')}}" target="_blank">Notes Cheat Sheet</a> before you start if you need some help</p>
         </div>
-
-    </div>
 
     <!-- {% if pagination and pagination.pages > 1 %}
     <div class="pagination">

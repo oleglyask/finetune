@@ -79,7 +79,7 @@ def user(username):
     #         error_out=False)
     # compositions = pagination.items
     # return render_template('user.html', user=user, compositions=compositions, pagination=pagination)
-    return render_template('user.html', user=user)
+    return render_template('profile.html', user=user)
 
 # will allow user to edit it's profile
 @main.route('/edit-profile', methods=['GET', 'POST'])

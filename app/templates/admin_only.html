@@ -6,22 +6,21 @@
 {% endblock navbar %}
 
 {% block page_content %}
-{{ super() }}
-<!-- displays all the users -->
-{% if users %}
+
     <div class="headers">Users</div>
 
-    <div class="forms-flexbox">
-        <div class="form">
-
-            <table class="table">
-                <caption>click on the Username to go to Profile</caption>
-                <tbody>
-                    <tr>
-                        <th scope="col">Username</th>
-                        <th scope="col">Email</th>
-                    </tr>
-                    {% for user in users %}
+    <!-- displays all the users -->
+    {% if users %}
+        <div class="forms-flexbox">
+            <div class="table-container">
+                <table class="table">
+                    <caption>click on the Username to go to Profile</caption>
+                    <tbody>
+                        <tr>
+                            <th scope="col">Username</th>
+                            <th scope="col">Email</th>
+                        </tr>
+                        {% for user in users %}
                         <tr>
                             <td>
                                 <img class="img-rounded profile_thumbnail" src="{{ user.unicornify(size=32) }}">
@@ -29,11 +28,10 @@
                             </td>
                             <td>{{ user.email }}</td>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
     {% endif %}
 {% endblock %}

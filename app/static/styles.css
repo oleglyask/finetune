@@ -69,9 +69,9 @@ body {
 
 }
 
-.headers{
-    color: white;
-    margin-top: 30px;
+.headers {
+    color: ivory;
+    margin-top: 10px;
     margin-bottom: 30px;
     display: flex;
     justify-content: center;
@@ -79,10 +79,6 @@ body {
     text-shadow: 0 0 3px green;
     font-size: xxx-large;
     text-align: center;
-}
-
-.headers .main-header{
-    color: beige;
 }
 
 /* space for rendering notes */
@@ -95,7 +91,7 @@ body {
     padding-left: 10px;
     padding-right: 15px;
     /* height: 310px; */
-    height: 260px;
+    height: 270px;
 }
 
 .play-scoreboard {
@@ -111,7 +107,7 @@ body {
     color: #73AD21;
     font-style: italic;
     font-family: cursive;
-    font-size: 4rem;
+    font-size: 3.5rem;
     background-color: transparent;
 }
 
@@ -123,7 +119,7 @@ body {
 
 /* score and timer digit counter */
 .badge {
-    font-size: 4rem;
+    font-size: 3.5rem;
     background-color: transparent;
 }
 
@@ -219,3 +215,25 @@ body {
     font-style: italic;
 }
 
+/* overrides the radio button to style it */
+.levels > input[type="radio"] {
+    display: none;
+}
+
+.levels > input[type="radio"] + *::before {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    width: 1.8rem;
+    height: 1.8rem;
+    margin-right: 1.5rem;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 0.1rem;
+    border-color: #73AD21;
+  }
+
+  .levels > input[type="radio"]:checked + *::before {
+    background: radial-gradient(#73AD21 0%, #73AD21 40%, transparent 50%, transparent);
+    border-color: #73AD21;
+  }

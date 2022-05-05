@@ -1,5 +1,5 @@
 
-document.getElementById('basic').checked = true
+// document.getElementById('basic').checked = true
 
 play = document.getElementById('play')
 play.addEventListener('click', () => {

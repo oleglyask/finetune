@@ -30,7 +30,7 @@
     <!-- Creates the piano shape and adds audio notes to correspond to each key -->
     <div class="piano">
         {% for note in notes %}
-        <div data-note="{{ note.name }}" class="key {{ note.color }}">
+        <div data-note="{{ note.name }}" class="key {{ note.color }} {{ note.name }}">
             <span class="noteLabel" id="label{{note.name}}">{{note.name}}</span>
         </div>
         <audio id="{{ note.name }}" src="{{url_for('static', filename='sounds/' + note.name + '4.mp3')}}"></audio>

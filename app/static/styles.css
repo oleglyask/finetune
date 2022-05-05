@@ -58,7 +58,7 @@ body {
     border-radius: 50px;
     padding: 20px;
     margin-top: 30px;
-    margin-bottom: 25px;
+    /* margin-bottom: 25px; */
 }
 
 /* Rendering high scores */
@@ -209,6 +209,7 @@ body {
 
 .cheat-sheet{
     font-size: small;
+    margin-top: 20px;
 }
 .cheat-sheet a{
     color: beige;

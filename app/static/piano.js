@@ -259,6 +259,9 @@ function startTimer(){
         if (!PAUSED){
             var secLeft = Math.floor(((TIMER_INTERVAL - (now - start)) % (1000 * 60))  / 1000);
             if (secLeft < 0) {
+                // will play the expired note
+                key = document.querySelectorAll('.white.' + CURRENT_NOTE)[0]
+                playNote(key, 'wrong')
                 score(-1);
                 nextNote();
             } else {

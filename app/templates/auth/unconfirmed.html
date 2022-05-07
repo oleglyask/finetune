@@ -1,5 +1,13 @@
 {% extends 'base.html' %}
 
-<p>Please confirm your account</p>
+{% block page_content %}
 
-<p>To resend confirmation email, please <a href="{{url_for('auth.resend_confirmation')}}">click here</a>!</p>
+<div class="headers">
+    <div class="main-header">
+        <h1>Please confirm your account</h1>
+        <h3>it might be in your spam folder</h3>
+        <h3>to resend confirmation email, <a class="link" href="{{url_for('auth.resend_confirmation')}}">click here</a>!</h3>
+    </div>
+</div>
+
+{% endblock %}

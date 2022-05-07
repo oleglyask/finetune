@@ -7,19 +7,19 @@
 {% endblock %}
 
 {% block page_content %}
-    {{super()}}
 
     <div class="headers">
         {{title.capitalize()}}
     </div>
 
     <div class="forms-flexbox">
-        <div class="form">
+        <div class="form-container">
             <!-- Bootstrap creation of a FORM -->
             {{ wtf.quick_form(form) }}
+
             {% if title == 'login' %}
-                <p>New user?
-                <a href="{{ url_for('auth.register') }}">Click here to register</a>
+                <p class="new-user">New user?
+                    <a href="{{ url_for('auth.register') }}">Click here to register</a>
                 </p>
             {% endif %}
         </div>

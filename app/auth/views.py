@@ -1,6 +1,8 @@
 
 from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_required, login_user, logout_user
+
+from ..decorators import admin_required
 from . import auth
 from .forms import LoginForm, RegisterForm, ChangePasswordForm, ChangeEmailForm
 from ..models import User
@@ -16,9 +18,7 @@ from ..email import send_email
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data, password=form.password.data, confirmed=True, high_score=0)
-        # in order to have email authantication working, omit confirmed=True
-        # user = User(username=form.username.data, email=form.email.data, password=form.password.data)
+        user = User(username=form.username.data, email=form.email.data, password=form.password.data, high_score=0)
         db.session.add(user)
         db.session.commit()
         flash(f'Please confirm your email.  An email has been sent to {user.email}')
@@ -48,6 +48,20 @@ def logout():
     logout_user()
     return redirect(url_for('main.index'))
 
+@auth.route('/delete_user/<id>')
+@login_required
+@admin_required
+def delete_user(id):
+    user = User.query.filter_by(id=id).first()
+    if user:
+        db.session.delete(user)
+        db.session.commit()
+        flash(f'{ user.username } has been deleted')
+    else:
+        flash('That user does not exist')
+    return redirect(url_for('main.for_admins_only'))
+
+
 @auth.route('/change_password', methods=['GET', 'POST'])
 @login_required
 def change_password():
@@ -73,7 +87,8 @@ def change_email():
         current_user.email = form.email.data
         db.session.add(current_user._get_current_object())
         db.session.commit()
-        return redirect(url_for('auth.resend_confirmation'))
+        flash('You have successfully changed your email')
+        return redirect(url_for('main.home'))
     return render_template('auth/auth_forms.html', form=form, title='change email')
 
 # Will take a token, attempt to confirm the user, then redirect to the index page
@@ -89,7 +104,7 @@ def confirm(token):
     else:
         # need to add resend_confirmation
         flash("Whoops! That confirmation link either expired, or it isn't valid.")
-    return redirect(url_for('main.index'))
+    return redirect(url_for('main.home'))
 
 @auth.route('/resend_confirmation')
 @login_required

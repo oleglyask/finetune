@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 {% block title %}{{super()}} Admin {% endblock title %}
+{% block head %}
+    {{super()}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+{% endblock head %}
 
 {% block navbar %}
     {{ super() }}
@@ -19,6 +23,7 @@
                         <tr>
                             <th scope="col">Username</th>
                             <th scope="col">Email</th>
+                            <th scope="col">Delete</th>
                         </tr>
                         {% for user in users %}
                         <tr>
@@ -27,6 +32,13 @@
                                 <a href="{{ url_for('main.user', username=user.username) }}"> {{ user.username }} </a>
                             </td>
                             <td>{{ user.email }}</td>
+                            <td>
+                                <a href="{{ url_for('auth.delete_user', id=user.id) }}">
+                                    {% if not user.is_administrator() %}
+                                        <span class="bi bi-trash"></span>
+                                    {% endif %}
+                                </a>
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>

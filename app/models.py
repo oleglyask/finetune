@@ -2,7 +2,7 @@
 # import datetime
 from datetime import datetime
 import hashlib
-# import re
+
 from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, AnonymousUserMixin
@@ -11,9 +11,16 @@ from flask import current_app
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
 class Note():
-    def __init__(self, name, color) -> None:
+    def __init__(self, name, color, sharp=False, flat=False, alt = False) -> None:
         self.name = name
         self.color = color
+        self.sharp = sharp
+        self.flat = flat
+        if alt == False:
+            self.alt = name
+        else:
+            self.alt = alt
+
 
 # Values represting different permissions for the Role model
 class Permission:

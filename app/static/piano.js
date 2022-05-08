@@ -1,4 +1,7 @@
-var CURRENT_NOTE = null;
+var CURRENT_NOTE = {
+    'name': null,
+    'accidental': ''
+};
 var SCORE = 0;
 var TIMER = null;
 var TIMER_INTERVAL = 5000; //countdown in seconds (*1000)
@@ -7,6 +10,9 @@ var START = true;
 var NOTES = []
 var high_score = document.getElementById('score').dataset.high
 var level = document.getElementById('vexflow-space').dataset.level
+var sharps = document.getElementById('vexflow-space').dataset.sharps.toLowerCase()
+var flats = document.getElementById('vexflow-space').dataset.flats.toLowerCase()
+var accidentalsInclude = document.getElementById('vexflow-space').dataset.accidentals.toLowerCase()
 var randomMap = {}
 
 // Create the possible note/stave/octave map based on the level
@@ -32,7 +38,10 @@ if (level === 'basic'){
 // Initializing variable NOTES that will determine random note selection
 // from WHITE keys only. Can use this to create difficulty levels
 document.querySelectorAll('.white').forEach(key => {
-        NOTES.push(key.dataset.note)
+        NOTES.push({
+            'name': key.dataset.note,
+            'sharp': key.dataset.sharp.toLowerCase(),
+            'flat': key.dataset.flat.toLowerCase()})
 })
 
 /* Creating eventListners for keys to play the notes */
@@ -45,7 +54,8 @@ keys.forEach(key => {
             /// CHECKS THE RESULT OF THE USER clicking a piano key
 
             //user pressed the CORRECT key
-            if (key.dataset.note === CURRENT_NOTE) {
+            altNameList = key.dataset.alt.split(' ')
+            if (altNameList.includes(CURRENT_NOTE.name + CURRENT_NOTE.accidental)) {
                 score(1)
                 // second parameter is the class name for the score counter
                 playNote(key, 'correct')
@@ -103,9 +113,35 @@ renderNote();
 
 // will create a random next note and render it
 function nextNote(){
-    let randomNoteIndex = Math.floor(Math.random() * NOTES.length);
-    CURRENT_NOTE = NOTES[randomNoteIndex]
-    renderNote(CURRENT_NOTE);
+
+    accidentalList = [];
+
+    // cycle until a note is selected
+    while (true){
+
+        let randomNoteIndex = Math.floor(Math.random() * NOTES.length);
+        CURRENT_NOTE.name = NOTES[randomNoteIndex].name
+
+        if (accidentalsInclude !== 'only'){
+            accidentalList.push('');
+        }
+        // see if sharps is turned on and note has sharps
+        if ((sharps === 'true') && (NOTES[randomNoteIndex].sharp == 'true')) {
+            accidentalList.push('#');
+        }
+        // see if flat is turned on and note has flats
+        if ((flats === 'true') && (NOTES[randomNoteIndex].flat == 'true')) {
+            accidentalList.push('b');
+        }
+        if (accidentalList.length > 0){
+            break;
+        }
+    }
+
+    let randomAccIndex = Math.floor(Math.random() * accidentalList.length);
+    CURRENT_NOTE.accidental = accidentalList[randomAccIndex];
+
+    renderNote(CURRENT_NOTE.name, CURRENT_NOTE.accidental );
     clearTimer()
     startTimer()
 }
@@ -143,7 +179,7 @@ function playNote(key, correctORWrong){
 
 // -------------------------------------------
 // Draw notes
-function renderNote(note){
+function renderNote(note, accidental=''){
 
     //Constants defining the width of the canvas and the size of the staves. Defined in css
     const width = document.getElementById('vexflow-space').offsetWidth
@@ -208,10 +244,20 @@ function renderNote(note){
         var voice = new VF.Voice({num_beats: 4,  beat_value: 4});
 
         // Create notes.  Lef and Right are Ghost notes (not visible), Middle is the note we need
+        mainNote = null;
+        if (accidental != '') {
+            mainNote = new VF.StaveNote({clef: clefName, keys: [note + accidental + "/" + octave], duration: "q" }).addModifier(new Vex.Flow.Accidental(accidental));
+        } else {
+            mainNote = new VF.StaveNote({clef: clefName, keys: [note + "/" + octave], duration: "q" });
+        }
+
         voice.addTickables([
             new VF.GhostNote({duration: "q"}),
             new VF.GhostNote({duration: "q"}),
-            new VF.StaveNote({clef: clefName, keys: [note + "/" + octave], duration: "q" }),
+            // new VF.StaveNote({clef: 'treble', keys: ["A#/5"], duration: "q" }).addModifier(new Vex.Flow.Accidental("#")),
+            // new VF.StaveNote({clef: 'treble', keys: ["Ab/5"], duration: "q" }).addModifier(new Vex.Flow.Accidental("b")),
+            // new VF.StaveNote({clef: clefName, keys: [note + "/" + octave], duration: "q" }),
+            mainNote,
             new VF.GhostNote({duration: "q"})
         ]);
 
@@ -259,9 +305,9 @@ function startTimer(){
         if (!PAUSED){
             var secLeft = Math.floor(((TIMER_INTERVAL - (now - start)) % (1000 * 60))  / 1000);
             if (secLeft < 0) {
-                // will play the expired note
-                key = document.querySelectorAll('.white.' + CURRENT_NOTE)[0]
-                playNote(key, 'wrong')
+                // will play the expired note will need to add note name to the class of the key element
+                // key = document.querySelectorAll('.white.' + CURRENT_NOTE)[0]
+                // playNote(key, 'wrong')
                 score(-1);
                 nextNote();
             } else {

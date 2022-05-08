@@ -1,3 +1,4 @@
+from tkinter.tix import Tree
 from flask import redirect, render_template, flash, url_for, current_app, request
 from flask_login import current_user, login_required
 
@@ -19,24 +20,29 @@ def home():
     return render_template('home.html')
 
 # game page
-@main.route('/play/<level>')
+@main.route('/play')
 @login_required
-def play(level):
+def play():
     current_user.ping()
+    level = request.args.get('level', 'basic')
+    flats = request.args.get('flats', 'false')
+    sharps = request.args.get('sharps', 'false')
+    accidentals = request.args.get('accidentals', 'include')
     notes = [
-        Note('C','white'),
-        Note('Db', 'black'),
-        Note('D', 'white'),
-        Note('Eb', 'black'),
-        Note('E', 'white'),
-        Note('F', 'white'),
-        Note('Gb', 'black'),
-        Note('G', 'white'),
-        Note('Ab', 'black'),
-        Note('A', 'white'),
-        Note('Bb', 'black'),
-        Note('B', 'white'),]
-    return render_template('piano.html', notes=notes, high_score=current_user.high_score, level=level)
+        Note('C', 'white', True, False),
+        Note('Db', 'black', alt='C# Db'),
+        Note('D', 'white', True, True),
+        Note('Eb', 'black', alt='D# Eb'),
+        Note('E', 'white', False, True),
+        Note('F', 'white', True, False),
+        Note('Gb', 'black', alt='F# Gb'),
+        Note('G', 'white', True, True),
+        Note('Ab', 'black', alt='G# Ab'),
+        Note('A', 'white', True, True),
+        Note('Bb', 'black', alt='A# Bb'),
+        Note('B', 'white', False, True)
+    ]
+    return render_template('piano.html', notes=notes, high_score=current_user.high_score, level=level, flats=flats, sharps=sharps, accidentals=accidentals)
 
 # called when user pressed the Exit button on the game page
 @main.route('/exit/<score>')

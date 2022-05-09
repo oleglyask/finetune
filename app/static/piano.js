@@ -172,8 +172,8 @@ function nextNote(){
 function playNote(key, correctORWrong){
     noteAudio = document.getElementById(key.dataset.note)
     // sets the source of the note based on the octave currently rendered note is in
-    // noteAudio.src = noteAudio.dataset.urlaudiobase + CURRENT_NOTE.octave + '/' + key.dataset.note + CURRENT_NOTE.octave + '.mp3'
-    noteAudio.src = noteAudio.dataset.urlaudiobase + key.dataset.note + '4.mp3'
+    noteAudio.src = noteAudio.dataset.urlaudiobase + key.dataset.note + CURRENT_NOTE.octave + '.mp3'
+    // noteAudio.src = noteAudio.dataset.urlaudiobase + key.dataset.note + '4.mp3'
     noteAudio.currentTime = 0
     noteAudio.play()
 

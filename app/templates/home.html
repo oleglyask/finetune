@@ -15,8 +15,11 @@
         </div>
 
         <div class="forms-flexbox">
+            <div class="generic-box">
+            <div class="selections-flex-box">
                 <!-- note level -->
                 <div class="levels">
+                    <label class="badge label level-choice-header" >notes</label><br>
                     <input type="radio" id="basic" class="radio-btn level" name="level" value="basic" checked>
                     <label class="badge label" for="basic">basic</label><br>
                     <input type="radio" id="treble" class="radio-btn level" name="level" value="treble">
@@ -26,28 +29,39 @@
                     <input type="radio" id="all" class="radio-btn level" name="level" value="all">
                     <label class="badge label" for="all">all of it</label>
                 </div>
-                <!-- accidental level -->
-                <div class="accidentals-form">
-                    <!-- which accidentals to include -->
-                    <div class="levels">
-                        <input type="radio" id="no-accidental" class="radio-btn accidental" name="accidental" value="noAccidental" checked>
-                        <label class="badge label" for="no-accidental">no accidentals</label><br>
-                        <input type="radio" id="sharp-accidental" class="radio-btn accidental" name="accidental" value="sharpAccidental">
-                        <label class="badge label" for="sharp-accidental">sharp only</label><br>
-                        <input type="radio" id="flat-accidental" class="radio-btn accidental" name="accidental" value="flatAccidental">
-                        <label class="badge label" for="flat-accidental">flat only</label><br>
-                        <input type="radio" id="all-accidental" class="radio-btn accidental" name="accidental" value="allAccidental">
-                        <label class="badge label" for="all-accidental">sharp and flat</label>
-                    </div>
-                    <div class="levels">
-                        <!-- to include accidentals with regular notes or to just use accidentals -->
-                        <input type="radio" id="accidental-only" class="radio-btn accidental-combine" name="accidental-combine" value="only">
-                        <label class="badge label" for="accidental-only">only accidentals</label><br>
-                        <input type="radio" id="accidental-include" class="radio-btn accidental-combine" name="accidental-combine" value="include" checked>
-                        <label class="badge label" for="accidental-include">include accidentals</label>
-                    </div>
+
+                <!-- which accidentals to include -->
+                <div class="levels">
+                    <label class="badge label level-choice-header" >accidentals</label><br>
+                    <input type="radio" id="no-accidental" class="radio-btn accidental" name="accidental" value="noAccidental" checked>
+                    <label class="badge label" for="no-accidental">none</label><br>
+                    <input type="radio" id="sharp-accidental" class="radio-btn accidental" name="accidental" value="sharpAccidental">
+                    <label class="badge label" for="sharp-accidental">sharp only</label><br>
+                    <input type="radio" id="flat-accidental" class="radio-btn accidental" name="accidental" value="flatAccidental">
+                    <label class="badge label" for="flat-accidental">flat only</label><br>
+                    <input type="radio" id="all-accidental" class="radio-btn accidental" name="accidental" value="allAccidental">
+                    <label class="badge label" for="all-accidental">both</label>
                 </div>
-        </div>
+
+            </div> <!-- end selections-flex-box box -->
+
+            <!-- toggle switch box -->
+            <div class="levels accidental-combine">
+                <label class="toggle" for="myToggle">
+                    <input class="toggle__input" name="" type="checkbox" id="myToggle">
+                    <div class="toggle__fill"></div>
+                </label>
+                <label class="badge label" id="myToggleLabel">accidentals only</label>
+                <!-- to include accidentals with regular notes or to just use accidentals -->
+                <!-- <input type="radio" id="accidental-only" class="radio-btn accidental-combine" name="accidental-combine" value="only">
+                <label class="badge label" for="accidental-only">only accidentals</label><br>
+                <input type="radio" id="accidental-include" class="radio-btn accidental-combine" name="accidental-combine" value="include" checked>
+                <label class="badge label" for="accidental-include">include accidentals</label> -->
+            </div> <!-- end toggle switch box -->
+
+            </div> <!-- end generic box -->
+        </div> <!-- end forms-flexbox -->
+
 
         <!-- Play button -->
         <div class="forms-flexbox">

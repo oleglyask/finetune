@@ -1,6 +1,8 @@
 var CURRENT_NOTE = {
     'name': null,
-    'accidental': ''
+    'accidental': '',
+    'clef': null,
+    'octave': null
 };
 var SCORE = 0;
 var TIMER = null;
@@ -61,12 +63,11 @@ keys.forEach(key => {
     key.addEventListener('click', () => {
         if (!PAUSED){
             /// CHECKS THE RESULT OF THE USER clicking a piano key
-
-            //user pressed the CORRECT key
             altNameList = key.dataset.alt.split('_')
+            //user pressed the CORRECT key
             if (altNameList.includes(CURRENT_NOTE.name + CURRENT_NOTE.accidental)) {
                 score(1)
-                // second parameter is the class name for the score counter
+                // second parameter is the class name for changing colors of piano, score counter
                 playNote(key, 'correct')
                 nextNote()
             //user pressed the WRONG key
@@ -108,7 +109,7 @@ exitBtn.addEventListener('click', () => {
     exitBtn.href = exitURL + SCORE
 })
 
-// render the first note
+// render the first screen without notes (Start- true, paused - true)
 renderNote();
 
 // scroll to the bottom of the page when page loads
@@ -128,6 +129,7 @@ function nextNote(){
     // cycle until a note is selected
     while (true){
 
+        // get random note name
         let randomNoteIndex = Math.floor(Math.random() * NOTES.length);
         CURRENT_NOTE.name = NOTES[randomNoteIndex].name
 
@@ -147,10 +149,20 @@ function nextNote(){
         }
     }
 
+    // Gets random accidental from possible accidentals
     let randomAccIndex = Math.floor(Math.random() * accidentalList.length);
     CURRENT_NOTE.accidental = accidentalList[randomAccIndex];
 
-    renderNote(CURRENT_NOTE.name, CURRENT_NOTE.accidental );
+    // Get random clef from the possible global randomMap variable
+    let clefIndex = Math.floor(Math.random() * Object.keys(randomMap).length);
+    CURRENT_NOTE.clef = Object.keys(randomMap)[clefIndex];
+
+    // Get random octave based on clef from the possible global randomMap variable
+    let octaveIndex = Math.floor(Math.random() * randomMap[CURRENT_NOTE.clef].length);
+    CURRENT_NOTE.octave = randomMap[CURRENT_NOTE.clef][octaveIndex]
+
+    //will render the note on the screen
+    renderNote(CURRENT_NOTE.name, CURRENT_NOTE.clef, CURRENT_NOTE.octave, CURRENT_NOTE.accidental);
     clearTimer()
     startTimer()
 }
@@ -159,6 +171,8 @@ function nextNote(){
 // parameters are key - key pressed; scorechangeClass - name of class to be added to the score counter that will define the color changed
 function playNote(key, correctORWrong){
     noteAudio = document.getElementById(key.dataset.note)
+    // sets the source of the note based on the octave currently rendered note is in
+    // noteAudio.src = noteAudio.dataset.urlaudiobase + key.dataset.note + CURRENT_NOTE.octave + '.mp3'
     noteAudio.src = noteAudio.dataset.urlaudiobase + key.dataset.note + '4.mp3'
     noteAudio.currentTime = 0
     noteAudio.play()
@@ -189,17 +203,17 @@ function playNote(key, correctORWrong){
 
 // -------------------------------------------
 // Draw notes
-function renderNote(note, accidental=''){
+function renderNote(note, clefName, octave, accidental){
 
     //Constants defining the width of the canvas and the size of the staves. Defined in css
     const width = document.getElementById('vexflow-space').offsetWidth
     const height = document.getElementById('vexflow-space').offsetHeight
 
     // Get random note from the possible global randomMap variable
-    let clefIndex = Math.floor(Math.random() * Object.keys(randomMap).length);
-    let clefName = Object.keys(randomMap)[clefIndex];
-    let octaveIndex = Math.floor(Math.random() * randomMap[clefName].length);
-    let octave = randomMap[clefName][octaveIndex]
+    // let clefIndex = Math.floor(Math.random() * Object.keys(randomMap).length);
+    // let clefName = Object.keys(randomMap)[clefIndex];
+    // let octaveIndex = Math.floor(Math.random() * randomMap[clefName].length);
+    // let octave = randomMap[clefName][octaveIndex]
 
     // Clear notes
     document.getElementById("vexflow-space").innerHTML = ''

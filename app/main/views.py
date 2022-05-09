@@ -26,7 +26,7 @@ def play():
     level = request.args.get('level', 'basic')
     flats = request.args.get('flats', 'false')
     sharps = request.args.get('sharps', 'false')
-    accidentals = request.args.get('accidentals', 'include')
+    accidentals = request.args.get('accidentals', 'false')
     notes = [
         Note('C', 'white', True, False),
         Note('Db', 'black', alt='C#_Db'),

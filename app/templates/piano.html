@@ -33,7 +33,6 @@
             <div data-note="{{ note.name }}" data-alt="{{ note.alt }}" data-sharp="{{ note.sharp }}" data-flat="{{ note.flat }}" class="key {{ note.color }}">
                 <span class="noteLabel" id="label{{note.name}}">{{ note.alt }}</span>
             </div>
-            <!-- <audio id="{{ note.name }}" src="{{url_for('static', filename='sounds/' + note.name + '4.mp3')}}"></audio> -->
             <audio id="{{ note.name }}" data-urlaudiobase="{{ url_for('static', filename='sounds/') }}"></audio>
         {% endfor %}
     </div>

@@ -89,10 +89,57 @@ a, a:link, a:hover, a:visited, a:active {
 
 }
 
-/* level sizing */
+/* level screen settings */
+/* ----------------------------------------- */
+.generic-box {
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.selections-flex-box {
+    display: flex;
+}
+.selections-flex-box > .levels {
+    flex: 1;
+}
+/* level boxes (there are 3) */
+.levels {
+    padding: 10px;
+}
+/* all labels inside levels box */
 .levels label {
+    font-size: 2.3rem;
+}
+/* all items inside the levels box */
+.levels > * {
+    margin-left: 20%;
+}
+/* just the headers inside levels box*/
+.levels > .level-choice-header {
+    width: 100%;
+    margin: auto;
+    text-decoration: underline;
+    margin-bottom: 15px;
     font-size: 3rem;
 }
+/* jsut the last levels box with toggle switch */
+.levels.accidental-combine {
+    width: 50%;
+    margin: auto;
+    margin-top: 10px;
+}
+.levels.accidental-combine > * {
+    margin-left: 0px;
+}
+.levels.accidental-combine > .label {
+    margin-bottom: 25px;
+}
+/* gets activated if the radio button for accidentals is on None */
+.levels.accidental-combine #myToggleLabel.inactive{
+    color: grey;
+}
+
+/* ---------------------------------------- */
 
 .headers {
     color: ivory;
@@ -242,6 +289,7 @@ a, a:link, a:hover, a:visited, a:active {
 }
 
 /* overrides the radio button to style it */
+/* -------------------------------------------- */
 .levels > input[type="radio"] {
     display: none;
 }
@@ -263,3 +311,47 @@ a, a:link, a:hover, a:visited, a:active {
     background: radial-gradient(#73AD21 0%, #73AD21 40%, transparent 50%, transparent);
     border-color: #73AD21;
   }
+/* -------------------------------------------- */
+
+/* TOGGLE SWITCH */
+/* overwrites the checkbox to create toggle switch */
+/* -------------------------------------------- */
+.toggle {
+    --width: 40px;
+    --height: calc(var(--width) / 2);
+    --border-radius: calc(var(--height) / 2);
+
+    display: inline-block;
+    cursor: pointer;
+}
+.toggle__input {
+    display: none;
+}
+.toggle__fill {
+    position: relative;
+    width: var(--width);
+    height: var(--height);
+    border-radius: var(--border-radius);
+    background: #dddddd;
+    transition: background 0.2s;
+}
+.toggle__fill::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: var(--height);
+    width: var(--height);
+    background: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    border-radius: var(--border-radius);
+    transition: transform 0.2s;
+}
+.toggle__input:checked ~ .toggle__fill {
+    background: #73AD21;
+}
+
+.toggle__input:checked ~ .toggle__fill::after {
+    transform: translateX(var(--height));
+}
+/* -------------------------------------------- */

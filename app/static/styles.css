@@ -1,39 +1,27 @@
 *, *::before, *::after {
     box-sizing: border-box;
 }
-
 body {
     background-color: rgb(63, 111, 147);
 }
-
-a, a:link, a:hover, a:visited, a:active {
-  color: inherit;
-  text-decoration: none;
- }
-
 .navbar {
     background-color: ivory;
 }
-
 .profile-img-container {
     margin-top: 30px;
 }
-
 .profile-container {
     min-height: 310px;
     margin-left: 50px;
 }
-
 #logo {
     color: #73AD21;
     font-style: italic;
     font-family: cursive;
 }
-
 .dropdown-menu a {
     font-family:Arial, Helvetica, sans-serif;
 }
-
 .main-container {
     width: 100%;
     /* min-height: 100vh; */
@@ -41,18 +29,15 @@ a, a:link, a:hover, a:visited, a:active {
     margin: auto;
     padding-bottom: 0px;
 }
-
 .game-container {
     width: 630px;
     height: 100vh;
     margin: auto;
 }
-
 /* all first level children of .game-container */
 .game-container > div {
     width: 100%;
 }
-
 .forms-flexbox {
     display: flex;
     justify-content: center;
@@ -65,30 +50,21 @@ a, a:link, a:hover, a:visited, a:active {
     margin-top: 30px;
     /* margin-bottom: 25px; */
 }
-
-.btn {
-    color: ivory;
-}
-
 /* contains auth forms items */
 .form-container {
     width: 80%;
     margin: auto;
     padding: 10px;
 }
-
 .form-container p {
     margin-top: 20px;
 }
-
 /* Rendering high scores */
 .table-container {
     width: 80%;
     margin: auto;
     margin-top: 10px;
-
 }
-
 /* level screen settings */
 /* ----------------------------------------- */
 .generic-box {
@@ -138,9 +114,7 @@ a, a:link, a:hover, a:visited, a:active {
 .levels.accidental-combine #myToggleLabel.inactive{
     color: grey;
 }
-
 /* ---------------------------------------- */
-
 .headers {
     color: ivory;
     margin-top: 10px;
@@ -152,7 +126,6 @@ a, a:link, a:hover, a:visited, a:active {
     font-size: xxx-large;
     text-align: center;
 }
-
 /* space for rendering notes */
 #vexflow-space {
     background-color: beige;
@@ -165,7 +138,6 @@ a, a:link, a:hover, a:visited, a:active {
     /* height: 310px; */
     height: 270px;
 }
-
 .play-scoreboard {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -173,13 +145,11 @@ a, a:link, a:hover, a:visited, a:active {
     justify-content: space-around;
     color: #73AD21;
 }
-
 /* score and timer digit counter */
 .badge {
     font-size: 3.5rem;
     background-color: transparent;
 }
-
 /* general label settings */
 .label {
     color: #73AD21;
@@ -188,44 +158,36 @@ a, a:link, a:hover, a:visited, a:active {
     font-size: 4rem;
     background-color: transparent;
 }
-
 .timer-score-container {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
 /* changes the color of the counter depending if the score goes up or down */
 #score.correct {
     color: #73AD21;
 }
-
 #score.wrong {
     color: red;
 }
-
 .piano {
     display: flex;
     justify-content: center;
     border: 2px solid black;
     padding: 0px;
 }
-
 .key {
     height: calc(var(--width) * 2.7);
     width: var(--width);
     text-align: center;
 }
-
 /* displays color of the piano key depending if the user guessed coorectly or not */
 .key.correct {
     background-color: #73AD21;
 }
-
 .key.wrong {
     background-color: lightcoral;
 }
-
 .noteLabel {
     position: relative;
     bottom: -190px;
@@ -233,22 +195,18 @@ a, a:link, a:hover, a:visited, a:active {
     display: none;
     font-family: cursive;
 }
-
 /* makes the name of the piano key appear */
 .noteLabel.correct {
     display: block;
 }
-
 .noteLabel.wrong {
     display: block;
 }
-
 .white {
     --width: 90px;
     background-color: ivory;
     border: 1px solid #333;
 }
-
 .black {
     --width: 52px;
     background-color: black;
@@ -256,44 +214,37 @@ a, a:link, a:hover, a:visited, a:active {
     margin-right: calc(var(--width) / -2);
     z-index: 2;
 }
-
-/* .black.active {
-    background-color: #333;
-} */
-
 /* the pause and exit buttons during play */
 .play-buttons-container {
     display: flex;
     justify-content: center;
     margin-top: 20px;
 }
-
 .btn-container {
     margin-left: 25px;
     margin-right: 25px;
     width: 25%;
 }
-
 .btn-success {
     border-radius: 25px;
     font-size: 2.5rem;
 }
-
 .cheat-sheet{
     font-size: small;
     margin-top: 20px;
 }
-
+.cheat-sheet a {
+   color: inherit;
+   text-decoration: none;
+}
 .link:hover {
     font-style: italic;
 }
-
 /* overrides the radio button to style it */
 /* -------------------------------------------- */
 .levels > input[type="radio"] {
     display: none;
 }
-
 .levels > input[type="radio"] + *::before {
     content: "";
     display: inline-block;
@@ -306,13 +257,11 @@ a, a:link, a:hover, a:visited, a:active {
     border-width: 0.1rem;
     border-color: #73AD21;
   }
-
   .levels > input[type="radio"]:checked + *::before {
     background: radial-gradient(#73AD21 0%, #73AD21 40%, transparent 50%, transparent);
     border-color: #73AD21;
   }
 /* -------------------------------------------- */
-
 /* TOGGLE SWITCH */
 /* overwrites the checkbox to create toggle switch */
 /* -------------------------------------------- */
@@ -350,7 +299,6 @@ a, a:link, a:hover, a:visited, a:active {
 .toggle__input:checked ~ .toggle__fill {
     background: #73AD21;
 }
-
 .toggle__input:checked ~ .toggle__fill::after {
     transform: translateX(var(--height));
 }

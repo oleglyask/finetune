@@ -1,4 +1,3 @@
-from tkinter.tix import Tree
 from flask import redirect, render_template, flash, url_for, current_app, request
 from flask_login import current_user, login_required
 
@@ -30,16 +29,16 @@ def play():
     accidentals = request.args.get('accidentals', 'include')
     notes = [
         Note('C', 'white', True, False),
-        Note('Db', 'black', alt='C# Db'),
+        Note('Db', 'black', alt='C#_Db'),
         Note('D', 'white', True, True),
-        Note('Eb', 'black', alt='D# Eb'),
+        Note('Eb', 'black', alt='D#_Eb'),
         Note('E', 'white', False, True),
         Note('F', 'white', True, False),
-        Note('Gb', 'black', alt='F# Gb'),
+        Note('Gb', 'black', alt='F#_Gb'),
         Note('G', 'white', True, True),
-        Note('Ab', 'black', alt='G# Ab'),
+        Note('Ab', 'black', alt='G#_Ab'),
         Note('A', 'white', True, True),
-        Note('Bb', 'black', alt='A# Bb'),
+        Note('Bb', 'black', alt='A#_Bb'),
         Note('B', 'white', False, True)
     ]
     return render_template('piano.html', notes=notes, high_score=current_user.high_score, level=level, flats=flats, sharps=sharps, accidentals=accidentals)

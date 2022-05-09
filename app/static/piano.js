@@ -44,6 +44,15 @@ document.querySelectorAll('.white').forEach(key => {
             'flat': key.dataset.flat.toLowerCase()})
 })
 
+// Label the black keys with spaces between the sharps and flats
+document.querySelectorAll('.noteLabel').forEach(label => {
+    names = label.innerHTML.split('_')
+    if (names.length > 1) {
+        label.innerHTML = names[0] + ' ' + names[1]
+    }
+
+})
+
 /* Creating eventListners for keys to play the notes */
 const keys = document.querySelectorAll('.key')
 // The inside code will execute when piano key is pressed
@@ -54,7 +63,7 @@ keys.forEach(key => {
             /// CHECKS THE RESULT OF THE USER clicking a piano key
 
             //user pressed the CORRECT key
-            altNameList = key.dataset.alt.split(' ')
+            altNameList = key.dataset.alt.split('_')
             if (altNameList.includes(CURRENT_NOTE.name + CURRENT_NOTE.accidental)) {
                 score(1)
                 // second parameter is the class name for the score counter
@@ -149,8 +158,8 @@ function nextNote(){
 // will execute on piano key click and play the note's sound
 // parameters are key - key pressed; scorechangeClass - name of class to be added to the score counter that will define the color changed
 function playNote(key, correctORWrong){
-    const noteAudio = document.getElementById(key.dataset.note)
-    const scoreCounter = document.getElementById('score')
+    noteAudio = document.getElementById(key.dataset.note)
+    noteAudio.src = noteAudio.dataset.urlaudiobase + key.dataset.note + '4.mp3'
     noteAudio.currentTime = 0
     noteAudio.play()
 
@@ -158,6 +167,7 @@ function playNote(key, correctORWrong){
     // Changes the color of the piano key
     key.classList.add(correctORWrong)
     // changes the color of the coutner
+    scoreCounter = document.getElementById('score')
     scoreCounter.classList.add(correctORWrong)
     // makes the note name appear on the piano key
     document.getElementById("label" + key.dataset.note).classList.add(correctORWrong);

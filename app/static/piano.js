@@ -6,7 +6,7 @@ var CURRENT_NOTE = {
 };
 var SCORE = 0;
 var TIMER = null;
-var TIMER_INTERVAL = 2000; //countdown in seconds (*1000)
+var TIMER_INTERVAL = 10000; //countdown in seconds (*1000)
 var PAUSED = true;
 var START = true;
 var NOTES = []

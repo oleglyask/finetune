@@ -338,8 +338,8 @@ body {
 }
 /* turn red if wrong */
 #circular-sb.wrong{
-    border: 3px solid red;
-    color: red;
+    border: 3px solid lightcoral;
+    color: lightcoral;
 }
 /* the p displaying the HINT letters */
 #note-hint {

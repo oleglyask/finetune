@@ -10,6 +10,8 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField(label='remember me')
     submit = SubmitField("Submit")
+    # submit = SubmitField("Submit", render_kw={"class": "btn btn-success btn-lg btn-block"})
+
 
 class ChangePasswordForm(FlaskForm):
     current_password = PasswordField('Current Password', validators=[DataRequired()])

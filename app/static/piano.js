@@ -6,7 +6,7 @@ var CURRENT_NOTE = {
 };
 var SCORE = 0;
 var TIMER = null;
-var TIMER_INTERVAL = 10000; //countdown in seconds (*1000)
+var TIMER_INTERVAL = 2000; //countdown in seconds (*1000)
 var PAUSED = true;
 var START = true;
 var NOTES = []
@@ -227,15 +227,17 @@ function playNote(key, correctORWrong, expired=false){
     key.classList.add(correctORWrong)
     // changes the color of the SCORE COUNTER
     document.getElementById('score').classList.add(correctORWrong)
-    // changes the color of TIMER if EXPIRED
+    // changes the color of HINT BOX and TIMER if EXPIRED
     if (expired === true){
         document.getElementById('counter').classList.add('expired')
+        document.getElementById('circular-sb').classList.add(correctORWrong);
     }
     // makes the note name appear on the piano key if note LEARNING MODE
     if (learningMode === 'false'){
+        // Makes the KEY LABELS appear
         document.getElementById("label" + key.dataset.note).classList.add(correctORWrong);
-        // show the hint box with note if the time EXPIRED
-        if (expired === true){
+        // show the hint box with note if the time EXPIRED or the KEY pressed is correct
+        if ((expired === true) || (correctORWrong === 'correct')){
             document.getElementById('circular-sb').classList.add('active');
             renderHintNote()
         }
@@ -253,10 +255,11 @@ function playNote(key, correctORWrong, expired=false){
         document.getElementById('score').classList.remove(correctORWrong)
         if (expired === true){
             document.getElementById('counter').classList.remove('expired')
+            document.getElementById('circular-sb').classList.remove(correctORWrong);
         }
         if (learningMode === 'false'){
             document.getElementById("label" + key.dataset.note).classList.remove(correctORWrong);
-            if (expired === true){
+            if ((expired === true) || (correctORWrong === 'correct')){
                 document.getElementById('circular-sb').classList.remove('active');
             }
         }

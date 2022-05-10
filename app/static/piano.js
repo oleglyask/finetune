@@ -6,7 +6,7 @@ var CURRENT_NOTE = {
 };
 var SCORE = 0;
 var TIMER = null;
-var TIMER_INTERVAL = 10000; //countdown in seconds (*1000)
+var TIMER_INTERVAL = 2000; //countdown in seconds (*1000)
 var PAUSED = true;
 var START = true;
 var NOTES = []
@@ -15,6 +15,7 @@ var level = document.getElementById('vexflow-space').dataset.level
 var sharps = document.getElementById('vexflow-space').dataset.sharps.toLowerCase()
 var flats = document.getElementById('vexflow-space').dataset.flats.toLowerCase()
 var accidentalsInclude = document.getElementById('vexflow-space').dataset.accidentals.toLowerCase()
+var learningMode = document.getElementById('vexflow-space').dataset.learningmode.toLowerCase()
 var randomMap = {}
 
 // Create the possible note/stave/octave map based on the level
@@ -46,16 +47,21 @@ document.querySelectorAll('.white').forEach(key => {
             'flat': key.dataset.flat.toLowerCase()})
 })
 
+// Load the LABELS for the KEYS
 // Label the black keys with spaces between the sharps and flats
 document.querySelectorAll('.noteLabel').forEach(label => {
     names = label.innerHTML.split('_')
     if (names.length > 1) {
-        label.innerHTML = names[0] + ' ' + names[1]
+        label.innerHTML = names[0] + '<br>' + names[1]
     }
-
+    // LEARNING MODE
+    if (learningMode === 'true'){
+        label.style.display = 'block'
+    }
 })
 
-/* Creating eventListners for keys to play the notes */
+
+/* Creating eventListners for KEYS to play the notes */
 const keys = document.querySelectorAll('.key')
 // The inside code will execute when piano key is pressed
 keys.forEach(key => {
@@ -79,15 +85,19 @@ keys.forEach(key => {
     })
 })
 
-//Register the pause button
+//Register the PAUSE button
 pauseBtn = document.getElementById('btn-pause')
 pauseBtn.addEventListener('click', () => {
     // initial start
     if (PAUSED === true && START === true){
-        // Renders the first note
+        // Renders the FIRST NOTE
         PAUSED = false
         START = false;
         pauseBtn.innerHTML = 'Pause'
+        // render the thought bubble if LEARNER MODE is true
+        if (learningMode === 'true'){
+            document.getElementById('circular-sb').classList.add('active');
+        }
         nextNote()
     } else {
         if (PAUSED === false){
@@ -102,14 +112,14 @@ pauseBtn.addEventListener('click', () => {
     }
 })
 
-//Register the Exit button
+//Register the EXIT button
 exitBtn = document.getElementById('btn-exit')
 exitBtn.addEventListener('click', () => {
     exitURL = document.getElementById('btn-exit').dataset.exiturl
     exitBtn.href = exitURL + SCORE
 })
 
-// render the first screen without notes (Start- true, paused - true)
+// render the FIRST screen without notes (Start- true, paused - true)
 renderNote();
 
 // scroll to the bottom of the page when page loads
@@ -161,15 +171,50 @@ function nextNote(){
     let octaveIndex = Math.floor(Math.random() * randomMap[CURRENT_NOTE.clef].length);
     CURRENT_NOTE.octave = randomMap[CURRENT_NOTE.clef][octaveIndex]
 
+    // show the hint-note if LEARNING MODE is true
+    if (learningMode === 'true') {
+        renderHintNote()
+        // document.getElementById('note-hint').innerHTML = CURRENT_NOTE.name + CURRENT_NOTE.accidental
+        // // show the the smaller think bubles depending where the note is
+        // if (CURRENT_NOTE.clef === 'treble') {
+        //     document.getElementById('circle-l-top').style.display = 'block'
+        //     document.getElementById('circle-s-top').style.display = 'block'
+        //     document.getElementById('circle-l-bottom').style.display = 'none'
+        //     document.getElementById('circle-s-bottom').style.display = 'none'
+        // } else {
+        //     document.getElementById('circle-l-top').style.display = 'none'
+        //     document.getElementById('circle-s-top').style.display = 'none'
+        //     document.getElementById('circle-l-bottom').style.display = 'block'
+        //     document.getElementById('circle-s-bottom').style.display = 'block'
+        // }
+    }
+
     //will render the note on the screen
     renderNote(CURRENT_NOTE.name, CURRENT_NOTE.clef, CURRENT_NOTE.octave, CURRENT_NOTE.accidental);
     clearTimer()
     startTimer()
 }
 
+// will render the HINT BOX with current note
+function renderHintNote(){
+    document.getElementById('note-hint').innerHTML = CURRENT_NOTE.name + CURRENT_NOTE.accidental
+        // show the the smaller think bubles depending where the note is
+        if (CURRENT_NOTE.clef === 'treble') {
+            document.getElementById('circle-l-top').style.display = 'block'
+            document.getElementById('circle-s-top').style.display = 'block'
+            document.getElementById('circle-l-bottom').style.display = 'none'
+            document.getElementById('circle-s-bottom').style.display = 'none'
+        } else {
+            document.getElementById('circle-l-top').style.display = 'none'
+            document.getElementById('circle-s-top').style.display = 'none'
+            document.getElementById('circle-l-bottom').style.display = 'block'
+            document.getElementById('circle-s-bottom').style.display = 'block'
+        }
+}
+
 // will execute on piano key click and play the note's sound
 // parameters are key - key pressed; scorechangeClass - name of class to be added to the score counter that will define the color changed
-function playNote(key, correctORWrong){
+function playNote(key, correctORWrong, expired=false){
     noteAudio = document.getElementById(key.dataset.note)
     // sets the source of the note based on the octave currently rendered note is in
     // noteAudio.src = noteAudio.dataset.urlaudiobase + key.dataset.note + CURRENT_NOTE.octave + '.mp3'
@@ -180,11 +225,21 @@ function playNote(key, correctORWrong){
     // addes a class to elements that will change color: Piano Key, Score Counter, Note on the Piano Key
     // Changes the color of the piano key
     key.classList.add(correctORWrong)
-    // changes the color of the coutner
-    scoreCounter = document.getElementById('score')
-    scoreCounter.classList.add(correctORWrong)
-    // makes the note name appear on the piano key
-    document.getElementById("label" + key.dataset.note).classList.add(correctORWrong);
+    // changes the color of the SCORE COUNTER
+    document.getElementById('score').classList.add(correctORWrong)
+    // changes the color of TIMER if EXPIRED
+    if (expired === true){
+        document.getElementById('counter').classList.add('expired')
+    }
+    // makes the note name appear on the piano key if note LEARNING MODE
+    if (learningMode === 'false'){
+        document.getElementById("label" + key.dataset.note).classList.add(correctORWrong);
+        // show the hint box with note if the time EXPIRED
+        if (expired === true){
+            document.getElementById('circular-sb').classList.add('active');
+            renderHintNote()
+        }
+    }
 
     // Check for high score
     // if ((high_score != 'None') && (SCORE > high_score)) {
@@ -195,8 +250,16 @@ function playNote(key, correctORWrong){
     //Removes the classes that will triger the colors to go back to the original
     noteAudio.addEventListener('ended', () => {
         key.classList.remove(correctORWrong)
-        scoreCounter.classList.remove(correctORWrong)
-        document.getElementById("label" + key.dataset.note).classList.remove(correctORWrong);
+        document.getElementById('score').classList.remove(correctORWrong)
+        if (expired === true){
+            document.getElementById('counter').classList.remove('expired')
+        }
+        if (learningMode === 'false'){
+            document.getElementById("label" + key.dataset.note).classList.remove(correctORWrong);
+            if (expired === true){
+                document.getElementById('circular-sb').classList.remove('active');
+            }
+        }
         // document.getElementById('score').innerText = SCORE // removes the HIGH score
     })
 }
@@ -298,6 +361,9 @@ function renderNote(note, clefName, octave, accidental){
         }
         // console.log("note: " +  note + ", octave: " + octave + ", stave: " + clefName)
         voice.draw(context, stave);
+
+        // return the Y position of the note
+        // return mainNote.getYs()[0]
     }
 }
 
@@ -329,9 +395,19 @@ function startTimer(){
         if (!PAUSED){
             var secLeft = Math.floor(((TIMER_INTERVAL - (now - start)) % (1000 * 60))  / 1000);
             if (secLeft < 0) {
-                // will play the expired note will need to add note name to the class of the key element
-                // key = document.querySelectorAll('.white.' + CURRENT_NOTE)[0]
-                // playNote(key, 'wrong')
+                // will play the expired note
+                // if CURRENT NOTE is an accidental cycle through the black keys to get the right key in-case of SHARPS
+                if (CURRENT_NOTE.accidental !== ''){
+                    document.querySelectorAll('.black').forEach(blackKey => {
+                        altNameList = blackKey.dataset.alt.split('_')
+                        if (altNameList.includes(CURRENT_NOTE.name + CURRENT_NOTE.accidental)) {
+                            playNote(blackKey, 'wrong', true)
+                        }
+                    })
+                } else {
+                    whiteKey = document.querySelectorAll('.white.' + CURRENT_NOTE.name)[0]
+                    playNote(whiteKey, 'wrong', true)
+                }
                 score(-1);
                 nextNote();
             } else {

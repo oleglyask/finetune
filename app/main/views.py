@@ -27,6 +27,7 @@ def play():
     flats = request.args.get('flats', 'false')
     sharps = request.args.get('sharps', 'false')
     accidentals = request.args.get('accidentals', 'false')
+    learningMode = request.args.get('learningMode', 'true')
     notes = [
         Note('C', 'white', True, False),
         Note('Db', 'black', alt='C#_Db'),
@@ -41,7 +42,8 @@ def play():
         Note('Bb', 'black', alt='A#_Bb'),
         Note('B', 'white', False, True)
     ]
-    return render_template('piano.html', notes=notes, high_score=current_user.high_score, level=level, flats=flats, sharps=sharps, accidentals=accidentals)
+    return render_template('piano.html', notes=notes, high_score=current_user.high_score, level=level, flats=flats,
+                    sharps=sharps, accidentals=accidentals, learningMode=learningMode)
 
 # called when user pressed the Exit button on the game page
 @main.route('/exit/<score>')

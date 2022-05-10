@@ -111,7 +111,7 @@ body {
     margin-bottom: 25px;
 }
 /* gets activated if the radio button for accidentals is on None */
-.levels.accidental-combine #myToggleLabel.inactive{
+.levels.accidental-combine #accOnlyToggleLabel.inactive{
     color: grey;
 }
 /* ---------------------------------------- */
@@ -163,11 +163,14 @@ body {
     justify-content: center;
     align-items: center;
 }
-/* changes the color of the counter depending if the score goes up or down */
+/* changes the color of the score counter depending if the score goes up or down */
 #score.correct {
     color: #73AD21;
 }
 #score.wrong {
+    color: red;
+}
+#counter.expired{
     color: red;
 }
 .piano {
@@ -189,20 +192,6 @@ body {
 .key.wrong {
     background-color: lightcoral;
 }
-.noteLabel {
-    position: relative;
-    bottom: -190px;
-    font-size: 1.5em;
-    display: none;
-    font-family: cursive;
-}
-/* makes the name of the piano key appear */
-.noteLabel.correct {
-    display: block;
-}
-.noteLabel.wrong {
-    display: block;
-}
 .white {
     --width: 90px;
     background-color: ivory;
@@ -214,6 +203,27 @@ body {
     margin-left: calc(var(--width) / -2);
     margin-right: calc(var(--width) / -2);
     z-index: 2;
+}
+
+/* note name on the keyboard */
+.noteLabel {
+    position: relative;
+    bottom: -180px;
+    font-size: 1.5em;
+    display: none;
+    font-family: cursive;
+}
+.black .noteLabel{
+    bottom: -70px;
+    color: beige;
+    font-size: 1em;
+}
+/* makes the name of the piano key appear */
+.noteLabel.correct {
+    display: block;
+}
+.noteLabel.wrong {
+    display: block;
 }
 /* the pause and exit buttons during play */
 .play-buttons-container {
@@ -302,5 +312,67 @@ body {
 }
 .toggle__input:checked ~ .toggle__fill::after {
     transform: translateX(var(--height));
+}
+/* -------------------------------------------- */
+
+/* HINT BUBBLE */
+/* -------------------------------------------- */
+.hint-container {
+    position: relative;
+}
+#circular-sb {
+    left: 410px;
+    bottom: 109px;
+    width: 69px;
+    height: 49px;
+    position: absolute;
+    border: 3px solid #73AD21;
+    border-radius: 50%;
+    text-align: center;
+    display: none;
+}
+/* displays if active */
+#circular-sb.active {
+    display: block;
+}
+/* the p displaying the HINT letters */
+#note-hint {
+        color: #73AD21;
+        font-style: italic;
+        font-family: cursive;
+        font-size: 2.5rem;
+}
+#circular-sb > div {
+    background-color: beige;
+    border: 3px solid #73AD21;
+    position: absolute;
+    border-radius: 50%;
+}
+/*right circle shape speech bubble*/
+#circle-l-top {
+    left: -14px;
+    bottom: 23px;
+    width: 28px;
+    height: 17px;
+}
+#circle-s-top {
+    left: -37px;
+    bottom: 32px;
+    width: 22px;
+    height: 13px;
+}
+
+  /*bottom circles*/
+#circle-l-bottom {
+    left: -14px;
+    bottom: 2px;
+    width: 28px;
+    height: 17px;
+}
+#circle-s-bottom {
+    left: -37px;
+    bottom: -3px;
+    width: 22px;
+    height: 13px;
 }
 /* -------------------------------------------- */

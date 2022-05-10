@@ -45,19 +45,26 @@
 
             </div> <!-- end selections-flex-box box -->
 
-            <!-- toggle switch box -->
-            <div class="levels accidental-combine">
-                <label class="toggle" for="myToggle">
-                    <input class="toggle__input" name="" type="checkbox" id="myToggle">
-                    <div class="toggle__fill"></div>
-                </label>
-                <label class="badge label" id="myToggleLabel">accidentals only</label>
-                <!-- to include accidentals with regular notes or to just use accidentals -->
-                <!-- <input type="radio" id="accidental-only" class="radio-btn accidental-combine" name="accidental-combine" value="only">
-                <label class="badge label" for="accidental-only">only accidentals</label><br>
-                <input type="radio" id="accidental-include" class="radio-btn accidental-combine" name="accidental-combine" value="include" checked>
-                <label class="badge label" for="accidental-include">include accidentals</label> -->
-            </div> <!-- end toggle switch box -->
+            <!-- TOGGLEs switch box -->
+            <div> <!-- toggle switch container -->
+                <div class="levels accidental-combine"> <!-- toggle switch box -->
+
+                    <!-- LEARNING MODE -->
+                    <label class="toggle" for="learningModeToggle">
+                        <input class="toggle__input" name="" type="checkbox" id="learningModeToggle" checked>
+                        <div class="toggle__fill"></div>
+                    </label>
+                    <label class="badge label" id="learningModeToggleLabel">learning mode</label>
+                    <br>
+                    <!-- ACCIDENTAL ONLY -->
+                    <label class="toggle" for="accOnlyToggle">
+                        <input class="toggle__input" name="" type="checkbox" id="accOnlyToggle" disabled>
+                        <div class="toggle__fill"></div>
+                    </label>
+                    <label class="badge label inactive" id="accOnlyToggleLabel">accidentals only</label>
+                </div> <!-- end toggle switch box -->
+
+            </div><!-- end toggle switch container -->
 
             </div> <!-- end generic box -->
         </div> <!-- end forms-flexbox -->

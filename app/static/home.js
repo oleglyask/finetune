@@ -1,18 +1,18 @@
-
+// embeded into html
 // document.getElementById('basic').checked = true
-document.getElementById('myToggle').disabled = true
-document.getElementById('myToggleLabel').classList.add('inactive')
+// document.getElementById('accOnlyToggle').disabled = true
+// document.getElementById('accOnlyToggleLabel').classList.add('inactive')
 
 // add listneres to the accidental radio buttons to change the state of Toggle switch
 document.querySelectorAll('.radio-btn.accidental').forEach(radio => {
     radio.addEventListener('click', () => {
         if (radio.value === 'noAccidental'){
-            document.getElementById('myToggleLabel').classList.add('inactive')
-            document.getElementById('myToggle').checked = false
-            document.getElementById('myToggle').disabled = true
+            document.getElementById('accOnlyToggleLabel').classList.add('inactive')
+            document.getElementById('accOnlyToggle').checked = false
+            document.getElementById('accOnlyToggle').disabled = true
         } else {
-            document.getElementById('myToggleLabel').classList.remove('inactive')
-            document.getElementById('myToggle').disabled = false
+            document.getElementById('accOnlyToggleLabel').classList.remove('inactive')
+            document.getElementById('accOnlyToggle').disabled = false
         }
     })
 })
@@ -40,7 +40,7 @@ document.getElementById('play').addEventListener('click', () => {
                 }
 
                 // Check Value of TOGGLE switch to include/only accidentals
-                if (document.getElementById('myToggle').checked === true){
+                if (document.getElementById('accOnlyToggle').checked === true){
                     accidentals = 'only';
                 } else {
                     accidentals = 'include';
@@ -52,7 +52,8 @@ document.getElementById('play').addEventListener('click', () => {
     // check the LEVEL selected and send to Play VIEW function
     document.querySelectorAll('.radio-btn.level').forEach(radio => {
         if (radio.checked === true) {
-            play.href = play.dataset.playurl + '?level=' + radio.value + '&flats=' + flats + '&sharps=' + sharps + '&accidentals=' + accidentals
+            play.href = play.dataset.playurl + '?level=' + radio.value + '&flats=' + flats + '&sharps=' + sharps +
+            '&accidentals=' + accidentals + '&learningMode=' + document.getElementById('learningModeToggle').checked
         }
     })
 

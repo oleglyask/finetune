@@ -12,8 +12,22 @@
 
 {% block page_content %}
 
-    <!-- container to place VexFlow music sheet -->
-    <div id="vexflow-space" data-level="{{ level }}" data-flats="{{ flats }}" data-sharps="{{ sharps }}" data-accidentals="{{ accidentals }}"></div>
+    <!-- container to place VexFlow music sheet and hint note-->
+    <div class="vexflow-container">
+        <div id="vexflow-space" data-level="{{ level }}" data-flats="{{ flats }}" data-sharps="{{ sharps }}"
+            data-accidentals="{{ accidentals }}" data-learningmode="{{ learningMode }}"></div>
+
+        <!-- NOTE HINT -->
+        <div class="hint-container">
+            <div id="circular-sb">
+                <p id="note-hint"></p>
+                <div id="circle-l-top"></div>
+                <div id="circle-s-top"></div>
+                <div id="circle-l-bottom"></div>
+                <div id="circle-s-bottom"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- counter and score -->
     <div class="play-scoreboard label">
@@ -30,7 +44,7 @@
     <!-- Creates the piano shape and adds audio notes to correspond to each key -->
     <div class="piano">
         {% for note in notes %}
-            <div data-note="{{ note.name }}" data-alt="{{ note.alt }}" data-sharp="{{ note.sharp }}" data-flat="{{ note.flat }}" class="key {{ note.color }}">
+            <div data-note="{{ note.name }}" data-alt="{{ note.alt }}" data-sharp="{{ note.sharp }}" data-flat="{{ note.flat }}" class="key {{ note.color }} {{ note.name }}">
                 <span class="noteLabel" id="label{{note.name}}">{{ note.alt }}</span>
             </div>
             <audio id="{{ note.name }}" data-urlaudiobase="{{ url_for('static', filename='sounds/') }}"></audio>

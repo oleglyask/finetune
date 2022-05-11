@@ -127,7 +127,7 @@ renderNote();
 // scroll to the bottom of the page when page loads
 window.onload = function () {
     setTimeout(function () {
-        document.querySelector('.cheat-sheet').scrollIntoView({behavior: 'smooth'}, false);
+        document.querySelector('.cheat-sheet').scrollIntoView(false, {behavior: 'smooth'});
     }, 100);
 }
 

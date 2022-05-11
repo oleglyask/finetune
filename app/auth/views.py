@@ -89,6 +89,7 @@ def change_email():
         db.session.commit()
         flash('You have successfully changed your email')
         # return redirect(url_for('main.home'))
+        # return render_template('auth/email/confirm.html')
         return redirect(url_for('auth.resend_confirmation'))
     return render_template('auth/auth_forms.html', form=form, title='change email')
 

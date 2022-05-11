@@ -4,11 +4,11 @@
 // document.getElementById('accOnlyToggleLabel').classList.add('inactive')
 
 // scroll to the bottom of the page when page loads
-window.onload = function () {
-    setTimeout(function () {
-        document.querySelector('.cheat-sheet').scrollIntoView({behavior: 'smooth'}, false);
-    }, 100);
-}
+// window.onload = function () {
+//     setTimeout(function () {
+//         document.querySelector('.cheat-sheet').scrollIntoView({behavior: 'smooth'}, false);
+//     }, 100);
+// }
 
 // add listneres to the accidental radio buttons to change the state of Toggle switch
 document.querySelectorAll('.radio-btn.accidental').forEach(radio => {

@@ -6,7 +6,7 @@ var CURRENT_NOTE = {
 };
 var SCORE = 0;
 var TIMER = null;
-var TIMER_INTERVAL = 10000; //countdown in seconds (*1000)
+var TIMER_INTERVAL = 5000; //countdown in seconds (*1000)
 var PAUSED = true;
 var START = true;
 var NOTES = []
@@ -85,7 +85,7 @@ keys.forEach(key => {
     })
 })
 
-//Register the PAUSE button
+//Register the START / PAUSE button
 pauseBtn = document.getElementById('btn-pause')
 pauseBtn.addEventListener('click', () => {
     // initial start
@@ -98,6 +98,8 @@ pauseBtn.addEventListener('click', () => {
         if (learningMode === 'true'){
             document.getElementById('circular-sb').classList.add('active');
         }
+        // scroll to the top view
+        document.querySelector('.main-container').scrollIntoView({behavior: 'smooth'});
         nextNote()
     } else {
         if (PAUSED === false){
@@ -123,10 +125,11 @@ exitBtn.addEventListener('click', () => {
 renderNote();
 
 // scroll to the bottom of the page when page loads
-// window.onload = function () {
-//     setTimeout(function() {window.scrollTo(0, document.body.scrollHeight);}, 500);
-
-// };
+window.onload = function () {
+    setTimeout(function () {
+        document.querySelector('.cheat-sheet').scrollIntoView({behavior: 'smooth'}, false);
+    }, 100);
+}
 
 
 //------------  FUNCTIONS START ------------------
@@ -174,19 +177,6 @@ function nextNote(){
     // show the hint-note if LEARNING MODE is true
     if (learningMode === 'true') {
         renderHintNote()
-        // document.getElementById('note-hint').innerHTML = CURRENT_NOTE.name + CURRENT_NOTE.accidental
-        // // show the the smaller think bubles depending where the note is
-        // if (CURRENT_NOTE.clef === 'treble') {
-        //     document.getElementById('circle-l-top').style.display = 'block'
-        //     document.getElementById('circle-s-top').style.display = 'block'
-        //     document.getElementById('circle-l-bottom').style.display = 'none'
-        //     document.getElementById('circle-s-bottom').style.display = 'none'
-        // } else {
-        //     document.getElementById('circle-l-top').style.display = 'none'
-        //     document.getElementById('circle-s-top').style.display = 'none'
-        //     document.getElementById('circle-l-bottom').style.display = 'block'
-        //     document.getElementById('circle-s-bottom').style.display = 'block'
-        // }
     }
 
     //will render the note on the screen
@@ -235,11 +225,16 @@ function playNote(key, correctORWrong, expired=false){
     // makes the note name appear on the piano key if note LEARNING MODE
     if (learningMode === 'false'){
         // Makes the KEY LABELS appear
-        document.getElementById("label" + key.dataset.note).classList.add(correctORWrong);
+        document.getElementById("label" + key.dataset.note).classList.add('active');
         // show the hint box with note if the time EXPIRED or the KEY pressed is correct
         if ((expired === true) || (correctORWrong === 'correct')){
             document.getElementById('circular-sb').classList.add('active');
             renderHintNote()
+        }
+    } else {
+        // in LEARNING MODE and pressed the wrong key
+        if (correctORWrong === 'wrong'){
+            document.getElementById('circular-sb').classList.add(correctORWrong);
         }
     }
 
@@ -258,9 +253,13 @@ function playNote(key, correctORWrong, expired=false){
             document.getElementById('circular-sb').classList.remove(correctORWrong);
         }
         if (learningMode === 'false'){
-            document.getElementById("label" + key.dataset.note).classList.remove(correctORWrong);
+            document.getElementById("label" + key.dataset.note).classList.remove('active'); //
             if ((expired === true) || (correctORWrong === 'correct')){
-                document.getElementById('circular-sb').classList.remove('active');
+                document.getElementById('circular-sb').classList.remove('active'); //
+            }
+        } else {
+            if (correctORWrong === 'wrong'){
+                document.getElementById('circular-sb').classList.remove(correctORWrong);
             }
         }
         // document.getElementById('score').innerText = SCORE // removes the HIGH score

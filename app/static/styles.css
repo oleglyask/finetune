@@ -23,6 +23,7 @@ body {
     font-family:Arial, Helvetica, sans-serif;
 }
 .main-container {
+    padding-top: 15px;
     width: 100%;
     /* min-height: 100vh; */
     /* padding: 30px; */
@@ -219,10 +220,13 @@ body {
     font-size: 1em;
 }
 /* makes the name of the piano key appear */
-.noteLabel.correct {
+/* .noteLabel.correct {
     display: block;
 }
 .noteLabel.wrong {
+    display: block;
+} */
+.active{
     display: block;
 }
 /* the pause and exit buttons during play */

@@ -118,7 +118,7 @@ pauseBtn.addEventListener('click', () => {
 exitBtn = document.getElementById('btn-exit')
 exitBtn.addEventListener('click', () => {
     exitURL = document.getElementById('btn-exit').dataset.exiturl
-    exitBtn.href = exitURL + SCORE
+    exitBtn.href = exitURL + '?score=' + SCORE + '&learningMode=' + learningMode
 })
 
 // render the FIRST screen without notes (Start- true, paused - true)

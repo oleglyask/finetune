@@ -46,14 +46,20 @@ def play():
                     sharps=sharps, accidentals=accidentals, learningMode=learningMode)
 
 # called when user pressed the Exit button on the game page
-@main.route('/exit/<score>')
+@main.route('/exit')
 @login_required
-def exit(score):
+def exit():
+    learningMode = request.args.get('learningMode', 'false')
+    score = request.args.get('score', '0')
+
     if (not current_user.high_score) or (int(score) > current_user.high_score):
-        current_user.high_score = score
-        flash('You got a new High score')
-        db.session.add(current_user._get_current_object())
-        db.session.commit()
+        if learningMode == 'false':
+            current_user.high_score = score
+            flash('You got a new High score')
+            db.session.add(current_user._get_current_object())
+            db.session.commit()
+        else:
+            flash('Good job, but turn OFF the Learning Mode to get on the board')
     return redirect(url_for('main.top_scores'))
 
 # will display top scores

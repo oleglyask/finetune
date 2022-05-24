@@ -18,6 +18,7 @@
                         <tr>
                             <th scope="col">Username</th>
                             <th scope="col">Score</th>
+                            <th scope="col">Level</th>
                         </tr>
                         {% for user in top_users %}
                         <tr>
@@ -27,6 +28,11 @@
                             </td>
                             <td>
                                 {{ user.high_score }}
+                            </td>
+                            <td>
+                                {% if user.high_score_level %}
+                                    <p class="level-high-scores">{{user.high_score_level}}</p>
+                                {% endif %}
                             </td>
                         </tr>
                         {% endfor %}

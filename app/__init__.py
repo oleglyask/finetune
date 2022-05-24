@@ -8,6 +8,7 @@ from config import config
 from flask_mail import Mail
 from flask_moment import Moment
 from flask_wtf.csrf import CSRFProtect
+from flask_migrate import Migrate
 
 # Initialize Bootstrap by passing a Flask instance to it in the constructor
 bootstrap = Bootstrap()
@@ -22,6 +23,9 @@ mail = Mail()
 moment = Moment()
 #  Flask-WTF's CSRFProtect object will protected from CSRF attacks
 csrf = CSRFProtect()
+# migrate manages version control of database if the structure changes
+migrate = Migrate()
+
 
 def create_app(config_name='default'):
 
@@ -37,6 +41,7 @@ def create_app(config_name='default'):
     mail.init_app(app)
     moment.init_app(app)
     csrf.init_app(app)
+    migrate.init_app(app, db, render_as_batch=True) #render_as_batch is for sqlite only
 
     # register bluprints with the app
     from .main import main as main_blueprint

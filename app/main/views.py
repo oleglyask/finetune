@@ -51,10 +51,12 @@ def play():
 def exit():
     learningMode = request.args.get('learningMode', 'false')
     score = request.args.get('score', '0')
+    level = request.args.get('level', None)
 
     if (not current_user.high_score) or (int(score) > current_user.high_score):
         if learningMode == 'false':
             current_user.high_score = score
+            current_user.high_score_level = level
             flash('You got a new High score')
             db.session.add(current_user._get_current_object())
             db.session.commit()

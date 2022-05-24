@@ -116,6 +116,7 @@ class User(UserMixin, db.Model):
     last_seen = db.Column(db.DateTime(), default=datetime.utcnow)
     avatar_hash = db.Column(db.String(32))
     high_score = db.Column(db.Integer)
+    high_score_level = db.Column(db.String(32))
 
 
     def __init__(self, **kwargs):

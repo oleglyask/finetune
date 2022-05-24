@@ -262,6 +262,11 @@ body {
  .main-header a:hover{
      font-style: italic;
  }
+.level-high-scores{
+    color: #73AD21;
+    font-style: italic;
+    font-family: cursive;
+}
 /* overrides the radio button to style it */
 /* -------------------------------------------- */
 .levels > input[type="radio"] {

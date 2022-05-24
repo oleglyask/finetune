@@ -29,6 +29,8 @@ def deploy():
     # migrate database
     upgrade()
 
+    User.update_level()
+
 """ INITIAL DEPLOYMENT ONLY
     # creating tables and relationships
     db.create_all()

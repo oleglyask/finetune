@@ -192,6 +192,14 @@ class User(UserMixin, db.Model):
         hash = self.avatar_hash or self.email_hash()
         return f'{url}/{hash}?s={size}'
 
+    @staticmethod
+    def update_level():
+        users = User.query.all()
+        for user in users:
+            user.high_score_level = 'basic'
+            db.session.add(user)
+        db.session.commit()
+
 # User before they have signed in or registered
 class AnonymousUser(AnonymousUserMixin):
     def can(self, perm):

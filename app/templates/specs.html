@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block title %} specs {% endblock %}
+{% block head %}
+    {{super()}}
+{% endblock %}
+
+{% block page_content %}
+
+        <!-- the top HEADER ON the page -->
+        <div class="headers">
+                <div class="main-header">
+                    <h1>Specs</h1>
+                </div>
+        </div>
+
+        <div class="forms-flexbox">
+            <div class="file-structure tech-box">
+                <label>File structure</label><br>
+                <p>
+                    finetune_app <br>
+                    ┣ app <br>
+                    ┃ ┣ auth <br>
+                    ┃ ┃ ┣ forms.py <br>
+                    ┃ ┃ ┣ views.py <br>
+                    ┃ ┃ ┗ __init__.py <br>
+                    ┃ ┣ main <br>
+                    ┃ ┃ ┣ errors.py <br>
+                    ┃ ┃ ┣ forms.py <br>
+                    ┃ ┃ ┣ views.py <br>
+                    ┃ ┃ ┗ __init__.py <br>
+                    ┃ ┣ static <br>
+                    ┃ ┣ templates <br>
+                    ┃ ┣ decorators.py <br>
+                    ┃ ┣ email.py <br>
+                    ┃ ┣ models.py <br>
+                    ┃ ┗ __init__.py <br>
+                    ┣ env <br>
+                    ┣ migrations <br>
+                    ┣ requirements <br>
+                    ┣ tests <br>
+                    ┣ config.py <br>
+                    ┗ finetune.py <br>
+                </p>
+            </div>
+            <div class="tech-list tech-box">
+                <label>Technology</label><br>
+                <ul>
+                    <li>Python</li>
+                    <li>Flask</li>
+                    <li>SQLAlchemy</li>
+                    <li>JavaScript</li>
+                    <li>Jinja2</li>
+                    <li>Bootstrap</li>
+                    <li>CSS</li>
+                    <li>HTML</li>
+                    <li>WTForms</li>
+                    <li>Migrate</li>
+                </ul>
+            </div>
+            <div class="requirements-list tech-box">
+                <label>Extensions</label><br>
+                <ul>
+                    <li>alembic</li>
+                    <li>dnspython</li>
+                    <li>email-validator</li>
+                    <li>Flask</li>
+                    <li>Flask-Bootstrap</li>
+                    <li>Flask-Login</li>
+                    <li>Flask-Mail</li>
+                    <li>Flask-Migrate</li>
+                    <li>Flask-SQLAlchemy</li>
+                    <li>Flask-WTF</li>
+                    <li>flask-talisman</li>
+                    <li>greenlet</li>
+                    <li>gunicorn</li>
+                    <li>idna</li>
+                    <li>itsdangerous</li>
+                    <li>Jinja2</li>
+                    <li>Mako</li>
+                    <li>psycopg2</li>
+                    <li>SQLAlchemy</li>
+                    <li>visitor</li>
+                    <li>Werkzeug</li>
+                    <li>WTForms</li>
+                </ul>
+            </div>
+        </div>
+
+{% endblock %}

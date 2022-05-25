@@ -82,6 +82,10 @@ def top_scores():
 def for_admins_only():
     return render_template('admin_only.html', users=User.query.all())
 
+@main.route('/specs')
+def specs():
+    return render_template('specs.html')
+
 # will get a user object and render the user.html.  If no user found, then 404 page will be rendered
 @main.route('/user/<username>')
 @login_required

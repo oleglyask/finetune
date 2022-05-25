@@ -262,10 +262,27 @@ body {
  .main-header a:hover{
      font-style: italic;
  }
+ .checkout-employer{
+     font-size: 1.5rem;
+ }
+ .checkout-employer span{
+    color: #73AD21;
+    font-style: italic;
+}
 .level-high-scores{
     color: #73AD21;
     font-style: italic;
     font-family: cursive;
+}
+.tech-box{
+    flex: 1;
+    margin-left: 15px;
+    font-size: 1.5rem;
+}
+.tech-box label{
+    text-decoration: underline;
+    width: 100%;
+    text-align: center;
 }
 /* overrides the radio button to style it */
 /* -------------------------------------------- */
